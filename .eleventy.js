@@ -3,7 +3,7 @@ const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 module.exports = function (config) {
 
     // Uses the semi-official "navigation"-plugin for eleventy 
-    eleventyConfig.addPlugin(eleventyNavigationPlugin);
+    config.addPlugin(eleventyNavigationPlugin);
     
     // Set static folder, which copntent will be copied to the output folder
     config.addPassthroughCopy({ "src/static/": "/" });

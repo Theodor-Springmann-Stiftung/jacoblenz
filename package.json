@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/schnulller/eleventy-sane#readme",
   "dependencies": {
-    "@11ty/eleventy": "^2.0.0-canary.23",
+    "@11ty/eleventy": "2.0.0-beta.2",
+    "@11ty/eleventy-navigation": "^0.3.5",
     "autoprefixer": "^10.4.13",
     "cssnano": "^5.1.14",
     "postcss": "^8.4.20",
