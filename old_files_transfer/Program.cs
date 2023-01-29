@@ -41,13 +41,13 @@ class SekundaerLiteraturParser {
     private string? Jahreszahl;
     private string? Name;
 
-    private Dictionary<string, (string, string, string)> ParsedFiles;
+    private List<(string Jahr, string Name, string Text, string Sort)> ParsedFiles;
     private StringBuilder? CurrentText;
 
     public SekundaerLiteraturParser(string filepath) {
         this.filepath = filepath;
         this.filename = filepath.Split("/").Last();
-        this.ParsedFiles = new Dictionary<string, (string, string, string)>();
+        this.ParsedFiles = new List<(string Jahr, string Name, string Text, string Sort)>();
         if (Directory.Exists("./output/" + filename)) Directory.Delete("./" + filename, true);
         Directory.CreateDirectory("./output/" + filename);
         this.document = Helpers.ParseFile(filepath);
@@ -75,16 +75,19 @@ class SekundaerLiteraturParser {
     }
 
     private void InsertInto() {
-        var AuthorYear = Jahreszahl + "_" + Name;
-        if (!ParsedFiles.ContainsKey(AuthorYear)) {
-            ParsedFiles.Add(AuthorYear, (Jahreszahl, Name, CurrentText.ToString()));
+        var similarentries = ParsedFiles.Where(x => x.Jahr == Jahreszahl && x.Name == Name).ToList();
+        if (!similarentries.Any()) {
+            ParsedFiles.Add((Jahreszahl, Name, CurrentText.ToString(), string.Empty));
         }
         else {
-            ParsedFiles[AuthorYear] = (
+            var fe = similarentries[0];
+            fe.Sort = "1";
+            ParsedFiles.Add((
                 Jahreszahl,
                 Name, 
-                ParsedFiles[AuthorYear].Item3 + "\n\n\n" + CurrentText.ToString()
-            );
+                CurrentText.ToString(),
+                (similarentries.Count() + 1).ToString()
+            ));
         }
         
         CurrentText.Clear();
@@ -93,15 +96,18 @@ class SekundaerLiteraturParser {
     private void Flush() {
         foreach (var entry in this.ParsedFiles) {
             var sb = new StringBuilder();
-            var fn = "./output/" + filename + "/" + entry.Value.Item1 + "_" + entry.Value.Item2 + ".html";
+            var fn = "./output/" + filename + "/";
+            if (String.IsNullOrWhiteSpace(entry.Sort)) fn += entry.Jahr + "_" + entry.Name + ".html";
+            else fn += entry.Jahr + "_" + entry.Name + "_" + entry.Sort + ".html";
             sb.AppendLine("---");
-            sb.AppendLine("Jahr: " + entry.Value.Item1);
-            sb.AppendLine("Autor: " + entry.Value.Item2);
+            sb.AppendLine("Jahr: " + entry.Jahr);
+            sb.AppendLine("Autor: " + entry.Name);
+            if (!String.IsNullOrWhiteSpace(entry.Sort)) sb.AppendLine("Sort: " + entry.Sort);
             sb.AppendLine("---");
             if (File.Exists(fn)) {
-                Console.WriteLine(fn);
+                Console.WriteLine("Überschreibt: " + fn);
             }
-            sb.Append(entry.Value.Item3);
+            sb.Append(entry.Text);
             System.IO.File.WriteAllText(fn, sb.ToString());
         }
     }
