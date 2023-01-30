@@ -1,10 +1,11 @@
 {
-    "title": "SITE DEFAULT TITLE",
-    "url": "URL",
-    "description": "Description used for SSO if template provides none.",
-    "keywords": "Keywords. Used for SSO.",
+    "title": "Jacob Lenz Archiv Heidelberg",
+    "url": "jacoblenz.de",
+    "description": "Forschungsstelle und Archiv zum Schriftsteller Reinhold Michael Jacob Lenz an der Theodor Springmann Stiftung in Heidelberg. Forschungsbibliografie, Drucke und Handschriftenverzeichnis.",
+    "shortdescription": "Forschungsbibliografie, Drucke und Handschriftenverzeichnisse",
+    "keywords": "Philosophie,Archiv,Schriftsteller,Autor,Literatur,Bibliographie,Philosophie,Forschung,Reinhold Michael Jacob Lenz,Jacob Lenz,Jakob Lenz,Lenz",
     "image": "Default Image. Used for sharing on social media if no image is provided.",
     "twitter": "@Twitter_Handle",
-    "card": "summary"
+    "card": "Forschungsstelle und Archiv zum Schriftsteller Reinhold Michael Jacob Lenz an der Theodor Springmann Stiftung in Heidelberg. Forschungsbibliografie, Drucke und Handschriftenverzeichnis."
   }
   

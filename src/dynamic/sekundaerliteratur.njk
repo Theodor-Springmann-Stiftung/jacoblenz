@@ -1,0 +1,51 @@
+---
+title: Forschungsbibliographie & Übersetzungen
+description: Ein Überblick über die Forschungsliteratur und Übersetzungen zu Leben und Werk des Dichters Jacob Michael Rinhold Lenz.
+eleventyNavigation:
+  key: Forschungsbibliographie
+  parent: Verzeichnisse
+  order: 5
+---
+
+
+<div class="border-black px-4 py-3 mb-4 order-2 hyphenation bg-gray-100 w-full">
+    <p class="mb-4 max-w-[80ch]">Grundlage für das Verzeichnis waren die bislang umfangreichsten Lenz-Bibliographien von Wolfgang Stammler (1916), David Price Benseler (1971) und Takeshi Imamura (1996), deren Einträge überprüft und ergänzt wurden. Sämtliche Titelaufnahmen basieren auf Autopsie. Das Verzeichnis wird weiter ausgebaut und überarbeitet (Vereinheitlichung der Titelaufnahmen); eine systematische Erschließung ist geplant.
+
+    <p class="mb-4 max-w-[80ch]">Nur in Auswahl aufgenommen sind bisher zum einen Lenz-Artikel in Literaturgeschichten und Lexika, zum zweiten Beiträge zur produktiven Lenz-Rezeption in der Literatur und auf dem (Musik-)Theater sowie zum dritten Kritiken zu Theateraufführungen von Lenz’ Stücken; für die beiden letzten Bereiche sind separate Verzeichnisse geplant.
+
+    <p class="max-w-[80ch]">Hinweise auf neue Lenz-Publikationen (incl. Rezensionen) werden dankbar aufgenommen; ebenso Ergänzungen und Korrekturen zur älteren Literatur über Lenz.
+</div>
+
+<div class="sticky top-0 z-10 bg-emerald-100 px-4 py-2 mb-4 w-full">
+{% set jahr = "" %}
+{% set count = 1 %}
+<a href="#top">↑</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+{%- for post in collections.sekundaer -%}
+    {% if post.data.Jahr !== jahr %}
+      {% if count % 10 == 0 %}
+        <a class="underline decoration-dotted" href="#{{ post.data.Jahr }}">{{ post.data.Jahr }}</a>&nbsp;&nbsp;
+      {% endif %}
+      {% set jahr = post.data.Jahr %}
+      {% set count = count + 1 %}
+    {% endif %}
+{%- endfor -%}
+</div>
+
+<div>
+  {% set jahr = "" %}
+  {%- for post in collections.sekundaer -%}
+    {% if post.data.Jahr !== jahr %}
+      {% if jahr !== "" %}
+        </div>
+        </div>
+      {% endif %}
+      {% set jahr = post.data.Jahr %}
+      <div class="flex flex-row mb-8 w-full">
+      <div class="text-xl pl-3 pr-1 grow-0 min-w-[4rem] text-right font-bold self-start z-0 sticky top-14 order-2" id="{{ jahr }}">{{ jahr }}</div>
+      <div class="px-4 border-r-2 grow border-slate-400">
+    {% endif %}
+    <div class="mb-3 pl-6 -indent-6 max-w-[90ch]">{{ post.content | safe }}</div>
+  {%- endfor -%}
+  </div>
+  </div>
+</div>

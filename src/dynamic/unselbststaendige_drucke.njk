@@ -1,0 +1,51 @@
+---
+title: Unselbstständige Veröffentlichungen zu Lebzeiten
+description: Verzeichnis unselbstständiger zu Lebzeiten veröffentlichter Drucke des Dichters Jacob Michael Reinhold Lenz
+eleventyNavigation:
+  key: Unselbstständige Drucke zu Lebzeiten
+  parent: Verzeichnisse
+  order: 3
+  pdf: yes
+---
+
+<div class="border-black px-4 py-3 mb-4 order-2 hyphenation bg-gray-100 w-full">
+    <p class="mb-4 max-w-[80ch]">Die zu Lebzeiten von Lenz erschienenen unselbständigen Drucke seiner Texte sind alphabetisch nach den Titeln der Publikationsorgane angeordnet. Wo es sich um Wiederabdrucke handelt, ist dies mit Verweis auf den entsprechenden Erstdruck angegeben.
+
+    <p class="mb-4 max-w-[80ch]"> Die bibliographischen Angaben zu den Publikationsorganen folgen den jeweiligen Titelblättern, wobei zunächst der Haupt-, Band- oder Jahrgangstitel und sodann ggf. der Neben- oder Stücktitel angeführt wird. Der Zeilenfall bei den Titeln der Zeitschriften etc. ist nicht markiert; bei den Werktiteln ist er nur dort vermerkt, wo andernfalls Mißverständnisse möglich wären.
+
+    <p class="max-w-[80ch]"> Aufgenommen sind auch solche Texte, bei denen Lenz’ Autorschaft unsicher ist (gekennzeichnet mit „UZ“: Unsichere Zuschreibung). Dies betrifft – neben der Sammlung „Jupiter und Schinznach“ – zum einen Richard Daunichts Zuschreibungen für die „Frankfurter gelehrten Anzeigen“ und den „Teutschen Merkur“ (Richard Daunicht: J. M. R. Lenz und Wieland. Dresden 1942, S. 32-46, 99-105), zum anderen Beiträge in den beiden Mitauer Zeitschriften „Für Leser und Leserinnen“ und „Liefländisches Magazin der Lektüre“, für die seit dem 19. Jahrhundert von verschiedenen Seiten Lenz als Autor vermutet wird. Als Nachweis für die Zuschreibung in den beiden baltischen Periodika wird jeweils nur eine Referenz (nach Möglichkeit mit Abdruck des Textes) angeführt, ohne Berücksichtigung der Genealogie der Zuschreibungen und Wertung der Argumente. Die mit „UZ“ bezeichneten Einträge umfassen folglich auch ohne weitere Differenzierung Zuschreibungen mit verschieden hoher resp. niedriger Wahrscheinlichkeit.
+</div>
+
+<div class="z-10 bg-emerald-100 px-4 py-2 mb-4 w-full">
+{% set jahr = "" %}
+{% set count = 1 %}
+Veröffentlichungen in:&nbsp;&nbsp;
+{%- for post in collections.unselbststaendigedrucke -%}
+    {% if post.data.Werk !== jahr %}
+      {% if count % 1 == 0 %}
+        <a class="hyphenation px-2 bg-gray-700 text-emerald-100 underline decoration-dotted" href="#{{ post.data.Werk }}">{{ post.data.Werk }}</a>&nbsp;&nbsp;
+      {% endif %}
+      {% set jahr = post.data.Werk %}
+      {% set count = count + 1 %}
+    {% endif %}
+{%- endfor -%}
+</div>
+
+<div>
+  {% set jahr = "" %}
+  {%- for post in collections.unselbststaendigedrucke -%}
+    {% if post.data.Werk !== jahr %}
+      {% if jahr !== "" %}
+        </div>
+        </div>
+      {% endif %}
+      {% set jahr = post.data.Werk %}
+      <div class="flex flex-row mb-8 w-full">
+      <div class="text-xl pl-3 pr-1 grow font-bold self-start z-0 sticky top-4 order-2" id="{{ jahr }}">{{ jahr }}</div>
+      <div class="px-4 border-r-2 grow-0 shrink-0 w-[90ch] border-slate-400">
+    {% endif %}
+    <div class="mb-3 pl-6 -indent-6 max-w-[90ch]">{{ post.content | safe }}</div>
+  {%- endfor -%}
+  </div>
+  </div>
+</div>

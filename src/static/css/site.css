@@ -1,3 +1,131 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Regular woff-files for regular font variants curerently
+   Instead we can use the Graphite versions of the font   
+
+@font-face {
+    font-family: 'Biolinum';
+    src: url('/fonts/LinBiolinum_R_G.ttf') format('truetype');
+    font-display: swap;
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Libertine';
+    src: url('/fonts/LinLibertine_R_G.ttf') format('truetype');
+    font-display: swap;
+    font-weight: normal;
+    font-style: normal;
+}
+
+*/
+
+@font-face {
+    font-family: "Sofia Sans";
+    src: url("../fonts/SofiaSans-Regular.ttf") format("truetype");
+    font-display: swap;
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  
+  @font-face {
+    font-family: "Sofia Sans";
+    src: url("../fonts/SofiaSans-Italic.ttf") format("truetype");
+    font-display: swap;
+    font-weight: normal;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: "Sofia Sans";
+    src: url("../fonts/SofiaSans-Bold.ttf") format("truetype");
+    font-display: swap;
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Sofia Sans";
+    src: url("../fonts/SofiaSans-BoldItalic.ttf") format("truetype");
+    font-display: swap;
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Libertine";
+    src: url("../fonts/LinLibertine_Rah.ttf") format("truetype");
+    font-display: swap;
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Libertine";
+    src: url("../fonts/LinLibertine_RIah.ttf") format("truetype");
+    font-display: swap;
+    font-weight: normal;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: "Libertine";
+    src: url("../fonts/LinLibertine_RZah.ttf") format("truetype");
+    font-display: swap;
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  /* @font-face {
+    font-family: "Playfair";
+    src: url("../fonts/PlayfairDisplay-VariableFont_wght.ttf") format("truetype");
+    font-display: swap;
+    font-weight: normal;
+    font-style: normal;
+  } */
+
+  body {
+    font-size: 19px;
+  }
+
+  @layer components {
+    .sidebar-nav li li {
+      @apply ml-4 text-lg
+    }
+
+    .sidebar-nav .active {
+      @apply font-bold
+    }
+
+    .maincolumn {
+      @apply basis-4/5 grow-0
+    }
+
+    .Einzug {
+      
+    }
+
+    .Kommentar {
+      @apply !indent-0 !pl-0 text-base
+    }
+
+    p {
+    }
+  }
+
+  .hyphenation {
+    hyphens: auto;
+  }
+
+  .sidebar-nav .active::before {
+    content: "· ";
+  }
+
+  aside {
+    min-height: 100vh;
+    max-height: calc(10rem + 100vh);
+  }

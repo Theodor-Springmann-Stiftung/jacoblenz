@@ -1,0 +1,26 @@
+{# From https://www.11ty.dev/docs/plugins/navigation/ #}
+{% set navPages = collections.all | eleventyNavigation %}
+
+{% macro renderNavListItem(entry) -%}
+<li>
+{% if not entry.children.length %}
+  <a {% if entry.url == page.url %} class="active"{% endif %} href="{{ entry.url }}">{{ entry.title }}</a>
+  {% if entry.pdf == "yes" %}
+    <span class="text-sm inline-block bg-slate-200 ml-1 px-1.5 rounded relative bottom-0.5">mit PDF</span>
+  {% endif %}
+{% else %}
+    <div>{{ entry.title }}</div>
+{% endif %}
+{%- if entry.children.length -%}
+  <ul>
+    {%- for child in entry.children %}
+        {{ renderNavListItem(child) }}
+    {% endfor -%}
+  </ul>
+{%- endif -%}
+</li>
+{%- endmacro %}
+
+<ul class="py-4 text-xl sidebar-nav">
+{%- for entry in navPages %}{{ renderNavListItem(entry) }}{%- endfor -%}
+</ul>

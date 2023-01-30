@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="de" dir="ltr" class="h-full">
   <head>    
     <link rel="canonical" href="{{ config.url }}{{ page.url }}">
     <link rel="stylesheet" href="/css/output.css" >
@@ -39,13 +39,29 @@
     <meta name="twitter:domain" content="{% if image %}{{ image }}{% else %}{{ config.image }}{% endif %}">
 
   </head>
-  <body>
-    {% include "header.njk" %}
+  <body class="w-full h-full">
+    <div class="
+      max-w-screen-2xl
+      mx-auto
+      flex flex-row">
+      <aside class="shrink-0 grow-0 basis-[26rem] sticky -top-40 flex flex-col">
+          {% include "header.njk" %}
+          {% include "sidenav.njk" %}
+          {% include "footer.njk" %}
+      </aside>
 
-    <main>
-		{{ content | safe }}
-    </main>
- 
-    {% include "footer.njk" %}
+      <main class="px-8 pt-[7.5rem] min-h-full">
+        <div>
+          <h2 class="text-3xl font-bold pb-4">
+              {{ title | safe }}
+          </h2>
+          {{ content | safe }}
+        </div>
+      </main>
+
+      {# <div class="row-start-3 col-span-6 self-end">
+      {% include "footer.njk" %}
+      </div> #}
+    </div>
   </body>
 </html>

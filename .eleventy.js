@@ -2,6 +2,104 @@ const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 
 module.exports = function (config) {
 
+    config.addCollection("sekundaer", function(collectionApi) {
+        return collectionApi
+            .getFilteredByGlob("**/lists/sekundaerliteratur/*.html")
+            .sort(function(a, b) {
+                if (a.data.Jahr !== null && b.data.Jahr !== null &&
+                        a.data.Jahr !== b.data.Jahr) {
+                    return a.data.Jahr - b.data.Jahr;
+                } else if ( a.data.Autor !== null && b.data.Autor !== null &&
+                        a.data.Autor !== b.data.Autor) {
+                    return a.data.Autor.localeCompare(b.data.Autor);
+                } else if (a.data.Sort !== null && b.data.Sort !== null &&
+                        a.data.Sort !== b.data.Sort) {
+                    return a.data.Sort - b.data.Sort;
+                }
+                return 0;
+            });
+    });
+
+    config.addCollection("selbststaendigedrucke", function(collectionApi) {
+        return collectionApi
+            .getFilteredByGlob("**/lists/selbstaendige_drucke/*.html")
+            .sort(function(a, b) {
+                if (a.data.Jahr !== null && b.data.Jahr !== null &&
+                        a.data.Jahr !== b.data.Jahr) {
+                    return a.data.Jahr - b.data.Jahr;
+                } else if ( a.data.Autor !== null && b.data.Autor !== null &&
+                        a.data.Autor !== b.data.Autor) {
+                    return a.data.Autor.localeCompare(b.data.Autor);
+                } else if (a.data.Sort !== null && b.data.Sort !== null &&
+                        a.data.Sort !== b.data.Sort) {
+                    return a.data.Sort - b.data.Sort;
+                }
+                return 0;
+            });
+    });
+
+    config.addCollection("posthumeausgaben", function(collectionApi) {
+        return collectionApi
+            .getFilteredByGlob("**/lists/posthume_ausgaben/*.html")
+            .sort(function(a, b) {
+                if (a.data.Jahr !== null && b.data.Jahr !== null &&
+                        a.data.Jahr !== b.data.Jahr) {
+                    return a.data.Jahr - b.data.Jahr;
+                } else if (a.data.Sort !== null && b.data.Sort !== null &&
+                        a.data.Sort !== b.data.Sort) {
+                    return a.data.Sort - b.data.Sort;
+                }
+                return 0;
+            });
+    });
+
+    config.addCollection("unselbststaendigedrucke", function(collectionApi) {
+        return collectionApi
+            .getFilteredByGlob("**/lists/unselbstaendige_drucke/*.html")
+            .sort(function(a, b) {
+                if ( a.data.Werk !== null && b.data.Werk !== null &&
+                        a.data.Werk !== b.data.Werk) {
+                    return a.data.Werk.localeCompare(b.data.Werk);
+                } else if (a.data.Sort !== null && b.data.Sort !== null &&
+                        a.data.Sort !== b.data.Sort) {
+                    return a.data.Sort - b.data.Sort;
+                }
+                return 0;
+            });
+    });
+
+    config.setServerOptions({
+        // Default values are shown:
+    
+        // Whether the live reload snippet is used
+        liveReload: true,
+    
+        // Whether DOM diffing updates are applied where possible instead of page reloads
+        domDiff: true,
+    
+        // The starting port number
+        // Will increment up to (configurable) 10 times if a port is already in use.
+        port: 8080,
+    
+        // Additional files to watch that will trigger server updates
+        // Accepts an Array of file paths or globs (passed to `chokidar.watch`).
+        // Works great with a separate bundler writing files to your output folder.
+        // e.g. `watch: ["_site/**/*.css"]`
+        watch: [],
+    
+        // Show local network IP addresses for device testing
+        showAllHosts: true,
+    
+        // Use a local key/certificate to opt-in to local HTTP/2 with https
+        https: {
+          // key: "./localhost.key",
+          // cert: "./localhost.cert",
+        },
+    
+        // Change the default file encoding for reading/serving files
+        encoding: "utf-8",
+    });
+
     // Uses the semi-official "navigation"-plugin for eleventy 
     config.addPlugin(eleventyNavigationPlugin);
     
