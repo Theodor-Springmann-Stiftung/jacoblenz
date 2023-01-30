@@ -16,22 +16,23 @@ eleventyNavigation:
     <p class="max-w-[80ch]">Hinweise auf neue Lenz-Publikationen (incl. Rezensionen) werden dankbar aufgenommen; ebenso Ergänzungen und Korrekturen zur älteren Literatur über Lenz.
 </div>
 
-<div class="sticky top-0 z-10 bg-emerald-100 px-4 py-2 mb-4 w-full">
+<div class="flex flex-row sticky top-0">
+<div class="z-10 border-r-2 border-slate-400 bg-emerald-100 px-4 py-2 self-start w-full">
 {% set jahr = "" %}
 {% set count = 1 %}
-<a href="#top">↑</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="#top">↑</a>&nbsp;&nbsp;
 {%- for post in collections.sekundaer -%}
-    {% if post.data.Jahr !== jahr %}
-      {% if count % 10 == 0 %}
+    {% if count % 80 == 0 and jahr !== post.data.Jahr %}
         <a class="underline decoration-dotted" href="#{{ post.data.Jahr }}">{{ post.data.Jahr }}</a>&nbsp;&nbsp;
-      {% endif %}
-      {% set jahr = post.data.Jahr %}
-      {% set count = count + 1 %}
+        {% set jahr = post.data.Jahr %}
     {% endif %}
+    {% set count = count + 1 %}
 {%- endfor -%}
 </div>
+<div class="text-xl pl-4 pr-1 grow-0 min-w-[4rem] font-bold order-2"></div>
+</div>
 
-<div>
+<div class="mt-4">
   {% set jahr = "" %}
   {%- for post in collections.sekundaer -%}
     {% if post.data.Jahr !== jahr %}
@@ -40,9 +41,9 @@ eleventyNavigation:
         </div>
       {% endif %}
       {% set jahr = post.data.Jahr %}
-      <div class="flex flex-row mb-8 w-full">
-      <div class="text-xl pl-3 pr-1 grow-0 min-w-[4rem] text-right font-bold self-start z-0 sticky top-14 order-2" id="{{ jahr }}">{{ jahr }}</div>
-      <div class="px-4 border-r-2 grow border-slate-400">
+      <div class="flex flex-row w-full" id="{{ jahr }}">
+      <div class="text-xl pr-1 pl-3 py-2 grow-0 min-w-[4rem] font-bold self-start z-0 sticky top-0 order-2" >{{ jahr }}</div>
+      <div class="px-4 border-r-2 grow py-2 border-slate-400">
     {% endif %}
     <div class="mb-3 pl-6 -indent-6 max-w-[90ch]">{{ post.content | safe }}</div>
   {%- endfor -%}
