@@ -21,6 +21,8 @@
 </li>
 {%- endmacro %}
 
-<ul class="py-4 text-xl sidebar-nav">
+<nav class="py-4 text-xl sidebar-nav px-2">
+<ul>
 {%- for entry in navPages %}{{ renderNavListItem(entry) }}{%- endfor -%}
 </ul>
+</nav>

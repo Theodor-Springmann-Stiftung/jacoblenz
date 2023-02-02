@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js,njk,yml,md}"],
+  content: ["./src/**/*.{html,js,njk,yml,md}", "./.eleventy.js"],
   theme: {
     fontFamily: {
       sans: ['Sofia Sans', 'sans-serif'],
@@ -34,7 +34,7 @@ module.exports = {
         'print': { 'raw': 'print' },
       },
       colors: {
-        'hamannHighlight': '#d80000',
+        'lenzHighlight': '#c00902',
         'hamannLightHighlight': '#cc7878',
         'hamannSlate': {
           50: '#6A829E',

@@ -13,6 +13,8 @@
     <link rel="shortcut icon" type="image/png" href="/images/x64-favicon.png" sizes="64x64" />#}
     <link rel="shortcut icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" type="image/png" href="/favicon.png" />
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.mark.min.js"></script>
 
     <!-- Meta -->
     <meta name="description" content="{% if description %}{{ description }}{% else %}{{ config.description }}{% endif %}">
@@ -41,13 +43,12 @@
   </head>
   <body class="w-full h-full">
     <div class="
+      px-12
       max-w-screen-2xl
       mx-auto
       flex flex-row">
-      <aside class="shrink-0 grow-0 basis-[26rem] sticky -top-40 flex flex-col">
-          {% include "header.njk" %}
-          {% include "sidenav.njk" %}
-          {% include "footer.njk" %}
+      <aside class="shrink-0 grow-0 basis-[26rem] sticky top-0  max-h-screen min-h-screen flex flex-col bg-slate-50">
+          {% include "sidebar.njk" %}
       </aside>
 
       <main class="px-8 pt-[7.5rem] min-h-full">
@@ -63,5 +64,58 @@
       {% include "footer.njk" %}
       </div> #}
     </div>
+
+  <script>
+    let dictionary = [];
+    function createIndex(id){
+      $("#" + id + " .searchable").each( (ind, el) => {
+        dictionary.push({
+          category: $(el).parents(".category"),
+          element: el,
+          searchitem: $(el).text().toLowerCase()
+        });
+      });
+    }
+
+    function findWord(word){
+      var sw = word.trim().toLowerCase();
+      return dictionary.filter(function(e){
+        if (e.searchitem.indexOf(sw) !== -1) {
+          return true;
+        } else {
+          return false;
+        };
+      })
+    }
+
+
+  $(document).ready(function( $ ) {
+    if (document.getElementById("list")) {
+      let found = [];
+      createIndex("list");
+      $("input[name='keyword']").keyup(function() {
+        var term = $(this).val() || '';
+        if( term ) {
+          for (let item of found) {
+            $(item.element).unmark();
+          }
+          $("#list .category").hide();
+          $("#list .searchable").hide();
+          found = findWord( term );
+          for (let item of found) {
+              $(item.category).addClass("search-expanded").show();
+              $(item.element).show();
+              if (term.length >= 3) {
+                $(item.element).mark(term);
+              } 
+          }
+        } else {
+          $("#list .category").show().removeClass("search-expanded").unmark();
+          $("#list .searchable").show();
+        }
+      });
+    }
+  });
+  </script>
   </body>
 </html>
