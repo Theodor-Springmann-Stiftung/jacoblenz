@@ -77,9 +77,9 @@
       });
     }
 
-    function findWord(word){
+    function findWord(word, d){
       var sw = word.trim().toLowerCase();
-      return dictionary.filter(function(e){
+      return d.filter(function(e){
         if (e.searchitem.indexOf(sw) !== -1) {
           return true;
         } else {
@@ -91,17 +91,22 @@
 
   $(document).ready(function( $ ) {
     if (document.getElementById("list")) {
-      let found = [];
       createIndex("list");
+      let found = dictionary;
+      let sw = "";
+      let swl = 0;
       $("input[name='keyword']").keyup(function() {
         var term = $(this).val() || '';
         if( term ) {
           for (let item of found) {
-            $(item.element).unmark();
+            $(item.element).unmark().hide();
           }
           $("#list .category").hide();
-          $("#list .searchable").hide();
-          found = findWord( term );
+          if (term.length > swl && term.startsWith(sw)) {
+            found = findWord( term, found);
+          } else {
+            found = findWord( term, dictionary );
+          }
           for (let item of found) {
               $(item.category).addClass("search-expanded").show();
               $(item.element).show();
@@ -109,9 +114,14 @@
                 $(item.element).mark(term);
               } 
           }
+          sw = term;
+          swl = term.length;
         } else {
           $("#list .category").show().removeClass("search-expanded").unmark();
           $("#list .searchable").show();
+          found = dictionary;
+          sw = "";
+          swl = 0;
         }
       });
     }
