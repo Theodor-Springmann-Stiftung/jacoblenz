@@ -66,6 +66,24 @@
     </div>
 
   <script>
+    // Script for showing and acting upon the "scroll to top button"
+    const scrollFunction = function () {
+        button = document.getElementById("scrollbutton");
+        if (button !== null) {
+            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+                // button.style.display = "block";
+                button.style.pointerEvents = "auto";
+                button.classList.remove("hidden");
+            } else {
+                // button.style.display = "none";
+                button.style.pointerEvents = "none";
+                button.classList.add("hidden");
+            }
+        }
+    }
+
+
+    // Scripts for filtering lists
     let dictionary = [];
     function createIndex(id){
       $("#" + id + " .searchable").each( (ind, el) => {
@@ -90,6 +108,17 @@
 
 
   $(document).ready(function( $ ) {
+    // Scroll button
+    if (document.getElementById("scrollbutton") !== null) {
+        scrollFunction();
+        document.getElementById("scrollbutton").addEventListener("click", () => {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        })
+        window.addEventListener("scroll", scrollFunction);
+    }
+
+    // List filtering
     if (document.getElementById("list")) {
       createIndex("list");
       let found = dictionary;
@@ -98,6 +127,9 @@
       $("input[name='keyword']").keyup(function() {
         var term = $(this).val() || '';
         if( term ) {
+          $(".hideifsearching").each( (ind, el) => {
+            $(el).hide();
+          });
           for (let item of found) {
             $(item.element).unmark().hide();
             $(item.category).hide();
@@ -122,6 +154,9 @@
           found = dictionary;
           sw = "";
           swl = 0;
+          $(".hideifsearching").each( (ind, el) => {
+            $(el).show();
+          });
         }
       });
     }

@@ -18,19 +18,22 @@ eleventyNavigation:
 
 
 <div class="sticky top-0 z-20">
-  <div class="flex flex-row">
-    <div class="z-10 bg-slate-100 px-4 py-2 self-start w-full">
-    <input class="w-full p-0.5 my-1 mb-2 border border-slate-300" type="text" name="keyword" class="form-control input-sm" placeholder="Liste durchsuchen...">
+  <div class="z-10 bg-slate-100 px-4 py-2 self-start w-full">
+    <div class="w-full flex flex-row items-baseline">
+      <input class="grow p-0.5 my-1 mb-2 border border-slate-300" type="text" name="keyword" class="form-control input-sm" placeholder="Liste durchsuchen...">
+      <a class="shrink ml-2 px-1.5 py-0.5 border border-slate-400" id="scrollbutton" href="#top">↑&nbsp;nach oben</a>
+    </div>
     {% set jahr = "" %}
     {% set count = 1 %}
-    <a href="#top">↑</a>&nbsp;&nbsp;
-    {%- for post in collections.sekundaer -%}
-        {% if count % 80 == 0 and jahr !== post.data.Jahr %}
-            <a class="underline decoration-dotted" href="#{{ post.data.Jahr }}">{{ post.data.Jahr }}</a>&nbsp;&nbsp;
-            {% set jahr = post.data.Jahr %}
-        {% endif %}
-        {% set count = count + 1 %}
-    {%- endfor -%}
+    <div class="hideifsearching">
+      Springe:&nbsp;&nbsp;
+      {%- for post in collections.sekundaer -%}
+          {% if count % 80 == 0 and jahr !== post.data.Jahr %}
+              <a class="underline decoration-dotted" href="#{{ post.data.Jahr }}">{{ post.data.Jahr }}</a>&nbsp;&nbsp;
+              {% set jahr = post.data.Jahr %}
+          {% endif %}
+          {% set count = count + 1 %}
+      {%- endfor -%}
     </div>
   </div>
 </div>
