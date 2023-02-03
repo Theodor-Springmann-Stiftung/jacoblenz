@@ -2,6 +2,24 @@ const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 
 module.exports = function (config) {
 
+    config.addCollection("handschriften", function(collectionApi) {
+        return collectionApi
+            .getFilteredByGlob("**/lists/handschriften/*.html")
+            .sort(function(a, b) {
+                if (a.data.Jahr !== null && b.data.Jahr !== null &&
+                        a.data.Jahr !== b.data.Jahr) {
+                    return a.data.Jahr - b.data.Jahr;
+                } else if ( a.data.Autor !== null && b.data.Autor !== null &&
+                        a.data.Autor !== b.data.Autor) {
+                    return a.data.Autor.localeCompare(b.data.Autor);
+                } else if (a.data.Sort !== null && b.data.Sort !== null &&
+                        a.data.Sort !== b.data.Sort) {
+                    return a.data.Sort - b.data.Sort;
+                }
+                return 0;
+            });
+    });
+
     config.addCollection("sekundaer", function(collectionApi) {
         return collectionApi
             .getFilteredByGlob("**/lists/sekundaerliteratur/*.html")

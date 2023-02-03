@@ -189,3 +189,77 @@ class Parser {
         }
     }
 }
+
+
+class HandschriftenParser {
+    private string filepath;
+    private string catname;
+    private string filename;
+    private XDocument document;
+    private string? Jahreszahl;
+
+    private List<(string Jahr, string Name, string Text, string Sort)> ParsedFiles;
+    private StringBuilder? CurrentText;
+
+    public HandschriftenParser(string filepath, string catname) {
+        this.filepath = filepath;
+        this.catname = catname;
+        this.filename = filepath.Split("/").Last();
+        this.ParsedFiles = new List<(string Jahr, string Name, string Text, string Sort)>();
+        if (Directory.Exists("./output/" + filename)) Directory.Delete("./output/" + filename, true);
+        Directory.CreateDirectory("./output/" + filename);
+        this.document = Helpers.ParseFile(filepath);
+        this.CurrentText = new StringBuilder();
+        foreach (var element in document.Descendants()) {
+            if (Helpers.HasClass("Jahreszahl", element)) {
+                if (Jahreszahl != null) InsertInto();
+                this.Jahreszahl = element.Value.Trim();
+            }
+            if (Helpers.HasClass("Einzug", element)) { 
+                if (CurrentText.Length != 0) {
+                    InsertInto();
+                }
+                CurrentText.Append(element.ToString());
+            }
+            if (Helpers.HasClass("Kommentar", element)) {
+                CurrentText.Append("\n\n");
+                CurrentText.Append(element.ToString());
+            }
+        }
+        Flush();
+    }
+
+    private void InsertInto() {
+        var similarentries = ParsedFiles.Where(x => x.Jahr == Jahreszahl).ToList();
+        if (!similarentries.Any()) {
+            ParsedFiles.Add((Jahreszahl, string.Empty, CurrentText.ToString(), "1"));
+        }
+        else {
+            ParsedFiles.Add((
+                Jahreszahl,
+                string.Empty, 
+                CurrentText.ToString(),
+                (similarentries.Count() + 1).ToString()
+            ));
+        }
+        
+        CurrentText.Clear();
+    }
+
+    private void Flush() {
+        foreach (var entry in this.ParsedFiles) {
+            var sb = new StringBuilder();
+            var fn = "./output/" + filename + "/";
+            fn += Helpers.ReplaceWhiteSpaces(entry.Jahr, "-") + "_" + entry.Sort + ".html";
+            sb.AppendLine("---");
+            sb.AppendLine(this.catname + ": " + entry.Jahr);
+            if (!String.IsNullOrWhiteSpace(entry.Sort)) sb.AppendLine("Sort: " + entry.Sort);
+            sb.AppendLine("---");
+            if (File.Exists(fn)) {
+                Console.WriteLine("Überschreibt: " + fn);
+            }
+            sb.Append(entry.Text);
+            System.IO.File.WriteAllText(fn, sb.ToString());
+        }
+    }
+}
