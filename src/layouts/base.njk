@@ -125,39 +125,57 @@
       let found = dictionary;
       let sw = "";
       let swl = 0;
+
       $("input[name='keyword']").keyup(function() {
-        var term = $(this).val() || '';
+        var term = $(this).val().trim() || '';
+
         if( term ) {
+          // Hide everything tagged hideifseaching
           $(".hideifsearching").each( (ind, el) => {
             $(el).hide();
           });
-          if (sw.length > 1) {
+          
+          // Unmark everything previously marked
+          if (sw.length > 0) {
             for (let item of found) {
               $(item.element).unmark();
             }
           }
+
+          // Only search in prior found elements if word starts the same
           if (term.length > swl && term.startsWith(sw)) {
             found = findWord( term, found );
           } else {
             found = findWord( term, dictionary );
           }
-          $("#list .category").hide();
+
+          // Hide all categories by default
+          requestAnimationFrame(function() {
+            $("#list .category").hide();
+          });
           for (let item of dictionary) {
             if (found.indexOf(item) !== -1) {
-              $(item.category).addClass("search-expanded").show();
-              $(item.element).show();
-              if (term.length >= 3) {
-                $(item.element).mark(term, {
-                  "separateWordSearch": false
-                });
-              }
+              requestAnimationFrame(function() {
+                $(item.category).addClass("search-expanded").show();
+                $(item.element).show();
+                if (term.length >= 3) {
+                  $(item.element).mark(term, {
+                    "separateWordSearch": false,
+                    "acrossElements": true
+                  });
+                }
+              });
             } else {
-              $(item.element).unmark().hide();
+              requestAnimationFrame(function() {
+                $(item.element).hide();
+              });
             }
           }
           sw = term;
           swl = term.length;
-        } else {
+        } 
+        
+        else {
           $("#list .category").show().removeClass("search-expanded").unmark();
           $("#list .searchable").show();
           found = dictionary;
