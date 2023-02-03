@@ -113,16 +113,28 @@
       @apply !indent-0 !pl-0 text-base
     }
 
-    .handschrift-sammlung .gruppe {
-      @apply border w-1/4 p-2
+    .handschrift-sammlung .handschrift {
+      @apply border basis-[31.5%] shrink-0
     }
 
     .handschrift-sammlung .ueberschrift-gruppe {
       @apply w-full
     }
 
+    .handschrift-sammlung .beschreibung {
+      @apply mt-1.5 px-2.5
+    }
+
+    .handschrift-sammlung .ueberschrift-gruppe {
+      @apply text-xl font-bold
+    }
+
     .handschrift-sammlung .feld {
-      @apply text-sm block bg-slate-200 rounded px-1.5 py-0.5 font-bold
+      @apply rounded-md inline text-sm mr-1 px-2 py-0.5 bg-slate-200 font-bold
+    }
+
+    .handschrift-sammlung .wert {
+      @apply py-0.5 px-1
     }
   }
 

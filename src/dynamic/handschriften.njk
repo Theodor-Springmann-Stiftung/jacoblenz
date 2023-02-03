@@ -8,12 +8,35 @@ eleventyNavigation:
   pdf: no
 ---
 
+<div class="border-black px-4 py-3 mb-4 order-2 hyphenation bg-gray-100 w-full">
+    <p class="mb-4 max-w-[80ch]">Die zu Lebzeiten von Lenz erschienenen unselbständigen Drucke seiner Texte sind alphabetisch nach den Titeln der Publikationsorgane angeordnet. Wo es sich um Wiederabdrucke handelt, ist dies mit Verweis auf den entsprechenden Erstdruck angegeben.
+
+    <p class="mb-4 max-w-[80ch]"> Die bibliographischen Angaben zu den Publikationsorganen folgen den jeweiligen Titelblättern, wobei zunächst der Haupt-, Band- oder Jahrgangstitel und sodann ggf. der Neben- oder Stücktitel angeführt wird. Der Zeilenfall bei den Titeln der Zeitschriften etc. ist nicht markiert; bei den Werktiteln ist er nur dort vermerkt, wo andernfalls Mißverständnisse möglich wären.
+
+    <p class="max-w-[80ch]"> Aufgenommen sind auch solche Texte, bei denen Lenz’ Autorschaft unsicher ist (gekennzeichnet mit „UZ“: Unsichere Zuschreibung). Dies betrifft – neben der Sammlung „Jupiter und Schinznach“ – zum einen Richard Daunichts Zuschreibungen für die „Frankfurter gelehrten Anzeigen“ und den „Teutschen Merkur“ (Richard Daunicht: J. M. R. Lenz und Wieland. Dresden 1942, S. 32-46, 99-105), zum anderen Beiträge in den beiden Mitauer Zeitschriften „Für Leser und Leserinnen“ und „Liefländisches Magazin der Lektüre“, für die seit dem 19. Jahrhundert von verschiedenen Seiten Lenz als Autor vermutet wird. Als Nachweis für die Zuschreibung in den beiden baltischen Periodika wird jeweils nur eine Referenz (nach Möglichkeit mit Abdruck des Textes) angeführt, ohne Berücksichtigung der Genealogie der Zuschreibungen und Wertung der Argumente. Die mit „UZ“ bezeichneten Einträge umfassen folglich auch ohne weitere Differenzierung Zuschreibungen mit verschieden hoher resp. niedriger Wahrscheinlichkeit.
+</div>
+
+<div class="z-10 bg-slate-100 px-4 py-2 self-start w-full">
+  {% set jahr = "" %}
+  {% set count = 1 %}
+  Handschrift(en) in:&emsp;
+  {%- for post in collections.handschriften -%}
+    <a class="underline decoration-dotted whitespace-nowrap" href="#{{ post.data.Ort }}">{{ post.data.Ort }}</a>&emsp;
+  {%- endfor -%}
+</div>
+
+<div class="sticky top-0 z-20">
+  <div class="flex flex-row z-10 bg-slate-100 px-4 py-2 self-start w-full items-baseline">
+    <input class="grow ml-2 p-0.5 pl-1 my-1 mb-2 border border-slate-300" type="text" name="keyword" class="form-control input-sm" placeholder="Liste durchsuchen...">
+    <a class="shrink ml-2 px-1.5 py-0.5 border border-slate-400" id="scrollbutton" href="#top">↑&nbsp;nach oben</a>
+  </div>
+</div>
 
 <div class="mt-4 w-full" id="list">
   {%- for post in collections.handschriften -%}
-    <div class="handschrift-sammlung w-full mb-12">
-      <div class="text-xl font-bold pb-4">{{ post.data.Ort | safe }}</div>
-      <div class="flex flex-row flex-wrap gap-x-4 gap-y-4 justify-start ">{{ post.content | safe }}</div>
+    <div class="handschrift-sammlung flex flex-row mb-8 w-full category" id="{{ post.data.Ort | safe }}">
+      <div class="text-xl grow font-bold self-start z-0 sticky top-20 order-0">{{ post.data.Ort | safe }}</div>
+      <div class="border-l-2 pl-4 grow-0 shrink-0 w-[90ch] border-slate-400 flex flex-row flex-wrap gap-x-4 gap-y-5 justify-start">{{ post.content | safe }}</div>
     </div>
   {%- endfor -%}
   </div>

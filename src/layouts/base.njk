@@ -85,9 +85,9 @@
 
     // Scripts for filtering lists
     let dictionary = [];
-    function createIndex(id){
-
-      $("#" + id + " .searchable").each( (ind, el) => {
+    function createIndex(id, searchable){
+      
+      $("#" + id + " " + searchable).each( (ind, el) => {
         dictionary.push({
           category: $(el).parents(".category"),
           element: el,
@@ -121,7 +121,13 @@
 
     // List filtering
     if (document.getElementById("list")) {
-      createIndex("list");
+      var searchable = "";
+      if (document.getElementsByClassName("searchable").length > 0) {
+        searchable = ".searchable";
+      } else if (document.getElementsByClassName("handschrift").length > 0) {
+        searchable = ".handschrift";
+      }
+      createIndex("list", searchable);
       let found = dictionary;
       let sw = "";
       let swl = 0;
@@ -132,6 +138,10 @@
         if( term ) {
           // Hide everything tagged hideifseaching
           $(".hideifsearching").each( (ind, el) => {
+            $(el).hide();
+          });
+
+          $(".ueberschrift-gruppe").each( (ind, el) => {
             $(el).hide();
           });
           
@@ -177,7 +187,7 @@
         
         else {
           $("#list .category").show().removeClass("search-expanded").unmark();
-          $("#list .searchable").show();
+          $("#list " + searchable).show();
           found = dictionary;
           sw = "";
           swl = 0;
