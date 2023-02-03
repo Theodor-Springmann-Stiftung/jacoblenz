@@ -141,8 +141,8 @@
           } else {
             found = findWord( term, dictionary );
           }
+          $("#list .category").hide();
           for (let item of dictionary) {
-            $(item.category).hide();
             if (found.indexOf(item) !== -1) {
               $(item.category).addClass("search-expanded").show();
               $(item.element).show();
