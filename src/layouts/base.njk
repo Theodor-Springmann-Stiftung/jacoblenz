@@ -86,6 +86,7 @@
     // Scripts for filtering lists
     let dictionary = [];
     function createIndex(id){
+
       $("#" + id + " .searchable").each( (ind, el) => {
         dictionary.push({
           category: $(el).parents(".category"),
@@ -107,7 +108,7 @@
     }
 
 
-  $(document).ready(function( $ ) {
+  $(document).ready(function() {
     // Scroll button
     if (document.getElementById("scrollbutton") !== null) {
         scrollFunction();
@@ -130,21 +131,29 @@
           $(".hideifsearching").each( (ind, el) => {
             $(el).hide();
           });
-          for (let item of found) {
-            $(item.element).unmark().hide();
-            $(item.category).hide();
+          if (sw.length > 1) {
+            for (let item of found) {
+              $(item.element).unmark();
+            }
           }
           if (term.length > swl && term.startsWith(sw)) {
             found = findWord( term, found );
           } else {
             found = findWord( term, dictionary );
           }
-          for (let item of found) {
+          for (let item of dictionary) {
+            $(item.category).hide();
+            if (found.indexOf(item) !== -1) {
               $(item.category).addClass("search-expanded").show();
               $(item.element).show();
               if (term.length >= 3) {
-                $(item.element).mark(term);
-              } 
+                $(item.element).mark(term, {
+                  "separateWordSearch": false
+                });
+              }
+            } else {
+              $(item.element).unmark().hide();
+            }
           }
           sw = term;
           swl = term.length;
