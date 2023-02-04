@@ -34,9 +34,9 @@ eleventyNavigation:
 
 <div class="mt-4 w-full" id="list">
   {%- for post in collections.handschriften -%}
-    <div class="handschrift-sammlung flex flex-row mb-8 w-full category" id="{{ post.data.Ort | safe }}">
-      <div class="text-xl grow font-bold self-start z-0 sticky top-20 order-0">{{ post.data.Ort | safe }}</div>
-      <div class="border-l-2 pl-4 grow-0 shrink-0 w-[90ch] border-slate-400 flex flex-row flex-wrap gap-x-4 gap-y-5 justify-start">{{ post.content | safe }}</div>
+    <div class="bg-slate-100 p-4 handschrift-sammlung flex flex-row mb-8 w-full category" id="{{ post.data.Ort | safe }}">
+      <div class="text-xl grow font-bold self-start z-0 sticky top-20 order-0 pr-4">{{ post.data.Ort | safe }}</div>
+      <div class=" grow-0 shrink-0 w-[90ch] border-slate-400 flex flex-row flex-wrap gap-x-4 gap-y-5 justify-start">{{ post.content | safe }}</div>
     </div>
   {%- endfor -%}
   </div>
