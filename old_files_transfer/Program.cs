@@ -3,11 +3,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
-var _ = new SekundaerLiteraturParser("./old_data/sekundaer.xml");
-var _2 = new Parser("./old_data/postumeausgabe.xml", "Jahr");
-var _3 = new Parser("./old_data/selbstdruckelebzeiten.xml", "Jahr");
-var _4 = new Parser("./old_data/unselbstdruckelebzeiten.xml", "Werk");
-var _5 = new Parser("./old_data/uebersetzungen.xml", "Sprache");
+
+var _ = new NeueSekLitParser("./old_data/sekn.xml");
+
 
 static class Helpers {
     public static XDocument ParseFile(string filepath) {
@@ -191,19 +189,18 @@ class Parser {
 }
 
 
-class HandschriftenParser {
+class NeueSekLitParser {
     private string filepath;
-    private string catname;
     private string filename;
     private XDocument document;
     private string? Jahreszahl;
+    private string? Name;
 
     private List<(string Jahr, string Name, string Text, string Sort)> ParsedFiles;
     private StringBuilder? CurrentText;
 
-    public HandschriftenParser(string filepath, string catname) {
+    public NeueSekLitParser(string filepath) {
         this.filepath = filepath;
-        this.catname = catname;
         this.filename = filepath.Split("/").Last();
         this.ParsedFiles = new List<(string Jahr, string Name, string Text, string Sort)>();
         if (Directory.Exists("./output/" + filename)) Directory.Delete("./output/" + filename, true);
@@ -211,13 +208,19 @@ class HandschriftenParser {
         this.document = Helpers.ParseFile(filepath);
         this.CurrentText = new StringBuilder();
         foreach (var element in document.Descendants()) {
-            if (Helpers.HasClass("Jahreszahl", element)) {
+            if (element.Name == "h1") {
                 if (Jahreszahl != null) InsertInto();
                 this.Jahreszahl = element.Value.Trim();
             }
             if (Helpers.HasClass("Einzug", element)) { 
                 if (CurrentText.Length != 0) {
                     InsertInto();
+                }
+                if (element.Descendants("b").Any()) {
+                    char[] totrim = { '[', ']', ':', ',' };
+                    var name = element.Descendants("b").First().Value.Trim();
+                    this.Name = name.TrimEnd(totrim).TrimStart(totrim);
+
                 }
                 CurrentText.Append(element.ToString());
             }
@@ -230,14 +233,16 @@ class HandschriftenParser {
     }
 
     private void InsertInto() {
-        var similarentries = ParsedFiles.Where(x => x.Jahr == Jahreszahl).ToList();
+        var similarentries = ParsedFiles.Where(x => x.Jahr == Jahreszahl && x.Name == Name).ToList();
         if (!similarentries.Any()) {
-            ParsedFiles.Add((Jahreszahl, string.Empty, CurrentText.ToString(), "1"));
+            ParsedFiles.Add((Jahreszahl, Name, CurrentText.ToString(), "1"));
         }
         else {
+            var fe = similarentries[0];
+            fe.Sort = "1";
             ParsedFiles.Add((
                 Jahreszahl,
-                string.Empty, 
+                Name, 
                 CurrentText.ToString(),
                 (similarentries.Count() + 1).ToString()
             ));
@@ -250,9 +255,11 @@ class HandschriftenParser {
         foreach (var entry in this.ParsedFiles) {
             var sb = new StringBuilder();
             var fn = "./output/" + filename + "/";
-            fn += Helpers.ReplaceWhiteSpaces(entry.Jahr, "-") + "_" + entry.Sort + ".html";
+            if (String.IsNullOrWhiteSpace(entry.Sort)) fn += entry.Jahr + "_" + entry.Name + ".html";
+            else fn += entry.Jahr + "_" + entry.Name + "_" + entry.Sort + ".html";
             sb.AppendLine("---");
-            sb.AppendLine(this.catname + ": " + entry.Jahr);
+            sb.AppendLine("Jahr: " + entry.Jahr);
+            sb.AppendLine("Autor: " + entry.Name);
             if (!String.IsNullOrWhiteSpace(entry.Sort)) sb.AppendLine("Sort: " + entry.Sort);
             sb.AppendLine("---");
             if (File.Exists(fn)) {
