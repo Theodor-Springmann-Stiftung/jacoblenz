@@ -6,111 +6,49 @@ eleventyNavigation:
   parent: Verzeichnisse
   order: 6
 ---
-<div class="maincolumn">
-Deutschland, Österreich, Schweiz. Zusammengetragen von Dr. Judith Schäfer<br> 
 
-<p><br>Berücksichtigt sind nur Inszenierungen von Werken, von denen Lenz im engeren Sinne der Autor ist (also nicht Opernbearbeitungen, biographische Annäherungen, Büchners „Lenz“ etc.). Ergänzungen sind jederzeit willkommen. 
+<div class="border-black px-4 py-3 mb-4 order-2 hyphenation bg-gray-100 w-full">
+    <p class="mb-4 max-w-[80ch]">Deutschland, Österreich, Schweiz. Zusammengetragen von Dr. Judith Schäfer 
 
-<p><br>Der Hofmeister. Bertolt Brecht nach Jakob Michael Reinhold Lenz. Berliner Ensemble, P.: 15.4.1950.
-http://petervoigt.info/episches-theater/
+    <p class="mb-4 max-w-[80ch]">Berücksichtigt sind nur Inszenierungen von Werken, von denen Lenz im engeren Sinne der Autor ist (also nicht Opernbearbeitungen, biographische Annäherungen, Büchners „Lenz“ etc.). Ergänzungen sind jederzeit willkommen. 
+</div>
 
-<p><br>Die Soldaten. Bayerisches Staatsschauspiel. R.: Ernst Ginsberg. P.: 22.9.1953.
+<div class="sticky top-0 z-20">
+  <div class="z-10 bg-slate-100 px-4 py-2 self-start w-full">
+    <div class="w-full flex flex-row items-baseline">
+      <input class="grow p-0.5 my-1 mb-2 border border-slate-300" type="text" name="keyword" class="form-control input-sm" placeholder="Liste durchsuchen...">
+      <a class="shrink ml-2 px-1.5 py-0.5 border border-slate-400" id="scrollbutton" href="#top">↑&nbsp;nach oben</a>
+    </div>
+    {% set jahr = "" %}
+    {% set count = 1 %}
+    <div class="hideifsearching">
+      Springe:&nbsp;&nbsp;
+      {%- for post in collections.theater -%}
+          {% if count % 1 == 0 and jahr !== post.data.Jahr %}
+              <a class="underline decoration-dotted" href="#{{ post.data.Jahr }}">{{ post.data.Jahr }}</a>&nbsp;&nbsp;
+              {% set jahr = post.data.Jahr %}
+          {% endif %}
+          {% set count = count + 1 %}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
 
-<p><br>Die Buhlschwester nach Plautus/Lenz (Uraufführung). Theater am Kurfürstendamm/Haus der Freien Volksbühne. R.: Oscar Fritz Schuh. P.: 23.12.1955.
-
-<p><br>Der Hofmeister. Bayerisches Staatsschauspiel/Residenztheater. R.: Hanskarl Zeiser. P.: 7. oder 9.8.1957.
-
-<p><br>Der Hofmeister. Schauspiel in 16 Bildern in einer Bearbeitung von Bertolt Brecht. Kreistheater Annaberg Erzgebirge. R.: Roland Gandt. P.: 13.2.1960.
-
-<p><br>Der Hofmeister. Komödie von Jakob Michael Reinhold Lenz. Bearbeitung von Bertolt Brecht. Stadttheater Luzern. R.: Horst Gnekow. P.: 1964/65.
-
-<p><br>Der Hofmeister. In einer Bearbeitung von Bertolt Brecht; R: Harry Buckwitz. Spielzeit 1965/66.
-
-<p><br>Die Soldaten nach Jakob Michael Reinhold Lenz. Freies Theater München. R.: Georg Froscher. P.: 29.4.1970.
-http://www.freiestheatermuenchen.de/produktion/soldaten
-
-<p><br>Die Soldaten von Heinar Kipphardt nach Jacob Michael Reinhold Lenz. Hamburger Erstaufführung. Thalia Theater Hamburg. R.: Jürgen Flimm. P.: Spielzeit 1973/74.
-
-<p><br>Der Hofmeister. Von Lenz/Brecht (Bearb.) Landestheater Halle. R.: Peter Kupke. P.: 9.11.1973.
-
-<p><br>Der Hofmeister. In der Bearbeitung von Bertolt Brecht. Berliner Ensemble, Staatstheater der Deutschen Demokratischen Republik. R.: Peter Kupke. P.: 6.10.1977.
-
-<p><br>Der Hofmeister. Stadttheater Pforzheim, R.: Serge Roon. P.: 21.2.1978.
-
-<p><br>Der Hofmeister oder Vorteile der Privaterziehung. Theater der Stadt Schweinfurth. R.: Lothar Trautmann. P.: 4.3.1979.
-
-<p><br>Die Soldaten. Theater Stralsund. R.: Alexander Wikarski. P.: 30.3.1980.
-
-<p><br>Der Hofmeister oder Vorteile der Privaterziehung. Schiller-Theater, Berlin. R.: Wolf Seesemann. P.: 15.4.1980.
-
-<p><br>Der Hofmeister. Eine Komödie von Jakob Michael Reinhold Lenz. Landestheater Württemberg-Hohenzollern Tübingen LTT. R.: Klaus Erforth. P.: 18.11.1980.
-
-<p><br>Die Soldaten. R.: Lutz Günzel. Gerhart-Hauptmann-Theater Görlitz. P.: 1.4.1983.
-
-<p><br>Die Soldaten. Landestheater Württemberg-Hohenzollern Tübingen. R.: Helfried Foron. P.: 10.12.1983.
-
-<p><br>Der neue Menoza oder Geschichte des Cumbanischen Prinzen Tandi. In der Bearbeitung von Christoph Hein. Städtische Bühnen Augsburg. R.: Heinri Hohenemser. P.: 24.3.1985.
-
-<p><br>Der Neue Menoza. Regie: G.H. Seebach. Schiller-Theater Berlin. P.: 11.11.1988.
-
-<p><br>Der Hofmeister. Von Bertolt Brecht nach J. M. R. Lenz. Freie Volksbühne Berlin. R.: Ulrich Heising. P.: 17.11.1988.
-
-<p><br>Der neue Menoza oder Geschichte des Cumbanischen Prinzen Tandi. R.: Tatjana Rese. Landestheater Württemberg-Hohenzollern Tübingen P.: 15.3.1992
-
-<p><br>Der Hofmeister oder Vorteile der Privaterziehung. Theater Viel Lärm um Nichts/Theater in der Pasinger Fabrik. I.: Eos Schopohl. P.: 14.5.1992.
-https://www.theaterviellaermumnichts.de/post/der-hofmeister
-
-<p><br>Der Hofmeister oder Vorteile der Privaterziehung. Schauspielhaus Bochum. R.: Urs Troller. P.: 9.1.1993.
-
-<p><br>Die Soldaten. In der Bearbeitung von Heinar Kipphardt. Bayerisches Staatsschauspiel/Residenztheater. R.: Klaus Emmerich. P.: 13.1.1994.
-
-<p><br>Der neue Menoza oder Geschichte des cumbanischen Prinzen Tandi. Thalia Theater Hamburg. R.: Nicolai Sykosch. P.: 25.3.1995.
-
-<p><br>Catharina von Siena. Ein religiöses – ein Künstlerschauspiel von Jakob Michael Reinhold Lenz. I.: Thorsten Lensing. Theater T1. P.: 16.2.2000 (Theater im Pumpenhaus, Münster), 9.3.2000 (sophiensaele, Berlin).
-
-<p><br>Die Soldaten. R.: Tilman Gersch. Schwerin, Mecklenburgisches Staatstheater. P.: 16.10.2003.
-
-<p><br>Der Hofmeister. R.: Joachim Klement. Bremer Theater. P.:16.10.2005.
-
-<p><br>Der Hofmeister. R.: Roberto Ciulli. Theater an der Ruhr, Mülheim an der Ruhr/Theater der Stadt Duisburg. P.: 10.5.2007.
-https://www.theater-an-der-ruhr.de/en/repertoire/der-hofmeister/
-
-<p><br>Der Hofmeister. I.: Frank Castorf. Schauspielhaus Zürich. P.: 14.1.2010.
-https://www.schauspielhaus.ch/de/archiv/9041/der-hofmeister	
-
-<p><br>Die Soldaten. I.: Frank Castorf. Volksbühne Berlin. P.: 25.2.2010.
-https://volksbuehne.adk.de/praxis/die_soldaten/index.html
-
-<p><br>Der Hofmeister oder Vorteile der Privaterziehung. Eine Koproduktion des Theater an der Parkaue mit der Hochschule für Schauspielkunst „Ernst Busch“, Abteilung Puppenspielkunst. R.: Albrecht Hirche. P.: 28.2.2010.
-https://www.parkaue.de/haus/archiv/d/der-hofmeister-oder-vorteile-der-privaterziehung/
-
-<p><br>Pandämonium Germanicum: Lenz im Loop. HAU 2, Berlin. I.: Andcompany&Co, P.: 6.1.2011.
-http://www.andco.de/pandaemonium-germanicum-lenz-im-loop/
-
-<p><br>Der Hofmeister. Schauspiel von Bertolt Brecht nach der Komödie „Der Hofmeister oder Vorteile der Privaterziehung“ von Jakob Michael Reinhold Lenz. Stadttheater Fürth. I.: Ingrid Gündisch. P.: 7.4.2011.
-https://www.ingrid-guendisch.de/inszenierungen/2011/der-hofmeister/
-
-<p><br>Der Hofmeister. Neues Theater Halle. I.: Jörg Steinberg. P.: 17.11.2012.
-
-<p>Jakob Michael Reinhold Lenz mit Texten von Jakob Michael Reinhold Lenz, Friedrich Oberlin und Georg Büchner. Fassung von Cornelia Rainer und Sibylle Dudek. R.: Cornelia Rainer Montagnes Russes, Salzburg. P.: 2012/Festival d’Avignon 8.7.2016.
-https://www.corneliarainer.com/theater/lenz
-
-<p><br>Der Hofmeister/Der Hals der Giraffe (von Jakob Michael Reinhold Lenz und Judith Schalansky. Maxim Gorki Theater, Berlin. I.: Armin Petras. P.: 12.6.2013.
-https://www.imago-images.de/st/0059816710
-
-<p><br>Der neue Menoza. Volksbühne am Rosa-Luxempurg-Platz, in Kooperation mit der Hochschule für Schauspielkunst „Ernst Busch“, Berlin. I.: Uwe Dag. P.: 12.11.2014.
-https://volksbuehne.adk.de/praxis/der_neue_menoza/index.html
-
-<p><br>Die Soldaten. Lichtbühne, im i-camp/neues theater münchen. I.: Maximilian Sachsse. P.: 12.4.2015.
-http://www.lichtbuehne.de/archiv/soldaten.html
-
-<p><br>„Das Schicksal stellt mich auf eine Nadelspitze“. Eine Jakob-Michael-Reinhold-Lenz-Collage. Theater der Altmark, Stendal. I.: Jochen Gehle. Online-Premiere: 24.4.2021.
-https://www.tda-stendal.de/spielplan/jungestda/das-schicksal-stellt-mich-auf-eine-nadelspitze
-
-<p><br>Der neue Menoza. Salzburger Landestheater. I.: Dörte Lyssewski. P.: 23.9.2021.
-https://www.salzburger-landestheater.at/de/produktionen/der-neue-menoza.html
-
-<p><br>Der Hofmeister, von Bertolt Brecht. Deutsches Theater Berlin. I.: Tom Kühnel, Jürgen Kuttner. P.: 11.12.2021.
-https://www.deutschestheater.de/programm/a-z/der_hofmeister/
-
+<div class="mt-4" id="list">
+  {% set jahr = "" %}
+  {%- for post in collections.theater -%}
+    {% if post.data.Jahr !== jahr %}
+      {% if jahr !== "" %}
+        </div>
+        </div>
+      {% endif %}
+      {% set jahr = post.data.Jahr %}
+      <div class="flex flex-row w-full category" id="{{ jahr }}">
+      <div class="text-xl pr-1 pl-3 py-2 grow-0 min-w-[4rem] font-bold self-start z-0 sticky top-20 order-2" >{{ jahr }}</div>
+      <div class="px-4 border-r-2 grow py-2 border-slate-400">
+    {% endif %}
+    <div class="mb-3 pl-6 -indent-6 searchable">{{ post.content | safe }}</div>
+  {%- endfor -%}
+  </div>
+  </div>
 </div>

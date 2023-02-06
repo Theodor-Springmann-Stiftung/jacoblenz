@@ -20,6 +20,24 @@ module.exports = function (config) {
             });
     });
 
+    config.addCollection("theater", function(collectionApi) {
+        return collectionApi
+            .getFilteredByGlob("**/lists/theaterauffuehrungen/*.html")
+            .sort(function(a, b) {
+                if (a.data.Jahr !== null && b.data.Jahr !== null &&
+                        a.data.Jahr !== b.data.Jahr) {
+                    return a.data.Jahr - b.data.Jahr;
+                } else if ( a.data.Name !== null && b.data.Name !== null &&
+                        a.data.Name !== b.data.Name) {
+                    return a.data.Name.localeCompare(b.data.Name);
+                } else if (a.data.Sort !== null && b.data.Sort !== null &&
+                        a.data.Sort !== b.data.Sort) {
+                    return a.data.Sort - b.data.Sort;
+                }
+                return 0;
+            });
+    });
+
     config.addCollection("selbststaendigedrucke", function(collectionApi) {
         return collectionApi
             .getFilteredByGlob("**/lists/selbstaendige_drucke/*.html")
