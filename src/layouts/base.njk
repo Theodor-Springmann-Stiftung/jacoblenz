@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="de" dir="ltr" class="h-full">
-  <head>    
+  <head>
     <link rel="canonical" href="{{ config.url }}{{ page.url }}">
     <link rel="stylesheet" href="/css/output.css" >
 
-    <title>{% if title and title != 'Home' %}{{title}} - {% endif %}{{ config.title }}</title>
+    <title>
+      {% if title and title != 'Home' %}{{title}} - {% endif %}{{ config.title }}</title>
 
     <!-- Icons -->
     <!-- Enable if favicons installed into the static/img/ directory -->
     {# <link rel="shortcut icon" type="image/png" href="/images/x16-favicon.png" sizes="16x16" />
     <link rel="shortcut icon" type="image/png" href="/images/x32-favicon.png" sizes="32x32" />
     <link rel="shortcut icon" type="image/png" href="/images/x64-favicon.png" sizes="64x64" />#}
-    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" type="image/png" href="/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+    <link rel="apple-touch-icon" type="image/png" href="/favicon.png"/>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery.mark.min.js"></script>
 
@@ -48,13 +49,13 @@
       mx-auto
       flex flex-row">
       <aside class="shrink-0 grow-0 basis-[26rem] sticky top-0  max-h-screen min-h-screen flex flex-col bg-slate-50">
-          {% include "sidebar.njk" %}
+        {% include "sidebar.njk" %}
       </aside>
 
       <main class="px-8 pt-[7.5rem] min-h-full max-w-[1120px]">
         <div>
           <h2 class="text-3xl font-bold pb-4">
-              {{ title | safe }}
+            {{ title | safe }}
           </h2>
           {{ content | safe }}
         </div>
@@ -65,139 +66,177 @@
       </div> #}
     </div>
 
-  <script>
-    // Script for showing and acting upon the "scroll to top button"
-    const scrollFunction = function () {
+    <script>
+      // Script for showing and acting upon the "scroll to top button"
+      const scrollFunction = function () {
         button = document.getElementById("scrollbutton");
         if (button !== null) {
-            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-                // button.style.display = "block";
-                button.style.pointerEvents = "auto";
-                button.classList.remove("hidden");
-            } else {
-                // button.style.display = "none";
-                button.style.pointerEvents = "none";
-                button.classList.add("hidden");
-            }
+          if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+            // button.style.display = "block";
+            button.style.pointerEvents = "auto";
+            button
+              .classList
+              .remove("hidden");
+          } else {
+            // button.style.display = "none";
+            button.style.pointerEvents = "none";
+            button
+              .classList
+              .add("hidden");
+          }
         }
-    }
-
-
-    // Scripts for filtering lists
-    let dictionary = [];
-    function createIndex(id, searchable){
-      
-      $("#" + id + " " + searchable).each( (ind, el) => {
-        dictionary.push({
-          category: $(el).parents(".category"),
-          element: el,
-          searchitem: $(el).text().toLowerCase()
-        });
-      });
-    }
-
-    function findWord(word, d){
-      var sw = word.trim().toLowerCase();
-      return d.filter(function(e){
-        if (e.searchitem.indexOf(sw) !== -1) {
-          return true;
-        } else {
-          return false;
-        };
-      })
-    }
-
-
-  $(document).ready(function() {
-    // Scroll button
-    if (document.getElementById("scrollbutton") !== null) {
-        scrollFunction();
-        document.getElementById("scrollbutton").addEventListener("click", () => {
-            document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-        })
-        window.addEventListener("scroll", scrollFunction);
-    }
-
-    // List filtering
-    if (document.getElementById("list")) {
-      var searchable = "";
-      if (document.getElementsByClassName("searchable").length > 0) {
-        searchable = ".searchable";
-      } else if (document.getElementsByClassName("handschrift").length > 0) {
-        searchable = ".handschrift";
       }
-      createIndex("list", searchable);
+
+      // Scripts for filtering lists
+      let dictionary = [];
+      let categories = document
+        .getElementById("list")
+        .getElementsByClassName("category");
       let found = dictionary;
       let sw = "";
       let swl = 0;
 
-      $("input[name='keyword']").keyup(function() {
-        var term = $(this).val().trim() || '';
+      $(".showifsearching").each((ind, el) => {
+        $(el).hide();
+      });
 
-        if( term ) {
+      function createIndex(id, searchable) {
+        $("#" + id + " " + searchable).each((ind, el) => {
+          dictionary.push({
+            category: el.closest(".category"), element: el, searchitem: $(el)
+              .text()
+              .toLowerCase()
+          });
+        });
+      }
+
+      function findWord(word, d) {
+        var sw = word
+          .trim()
+          .toLowerCase();
+        return d.filter(function (e) {
+          if (e.searchitem.indexOf(sw) !== -1) {
+            return true;
+          } else {
+            return false;
+          };
+        })
+      }
+
+      const search = function () {
+        term = $("input[name='keyword']")
+          .val()
+          .trim() || '';
+
+        // Unmark everything previously marked
+        for (let item of found) {
+          $(item.element).unmark();
+        }
+
+        if (term) {
           // Hide everything tagged hideifseaching
-          $(".hideifsearching").each( (ind, el) => {
+          $(".hideifsearching").each((ind, el) => {
             $(el).hide();
           });
 
-          $(".ueberschrift-gruppe").each( (ind, el) => {
+          $(".showifsearching").each((ind, el) => {
+            $(el).show();
+          });
+
+          $(".ueberschrift-gruppe").each((ind, el) => {
             $(el).hide();
           });
-          
-          // Unmark everything previously marked
-          if (sw.length > 0) {
-            for (let item of found) {
-              $(item.element).unmark();
-            }
+
+          // Hide all categories by default
+          for (let cat of categories) {
+            cat
+              .classList
+              .add("hidden");
           }
 
           // Only search in prior found elements if word starts the same
           if (term.length > swl && term.startsWith(sw)) {
-            found = findWord( term, found );
+            found = findWord(term, found);
           } else {
-            found = findWord( term, dictionary );
+            found = findWord(term, dictionary);
           }
 
-          // Hide all categories by default
-          requestAnimationFrame(function() {
-            $("#list .category").hide();
-          });
           for (let item of dictionary) {
             if (found.indexOf(item) !== -1) {
-              requestAnimationFrame(function() {
-                $(item.category).addClass("search-expanded").show();
-                $(item.element).show();
-                if (term.length >= 3) {
-                  $(item.element).mark(term, {
-                    "separateWordSearch": false,
-                    "acrossElements": true
-                  });
-                }
-              });
+              item
+                .category
+                .classList
+                .add("search-expanded");
+              item
+                .category
+                .classList
+                .remove("hidden");
+              item
+                .element
+                .classList
+                .remove("hidden");
+              if (term.length >= 2) {
+                $(item.element).mark(term, {
+                  "separateWordSearch": false,
+                  "acrossElements": true
+                });
+              }
             } else {
-              requestAnimationFrame(function() {
-                $(item.element).hide();
-              });
+              item
+                .element
+                .classList
+                .add("hidden");
             }
           }
           sw = term;
           swl = term.length;
-        } 
-        
-        else {
-          $("#list .category").show().removeClass("search-expanded").unmark();
-          $("#list " + searchable).show();
+        } else {
+          var hidden = document
+            .getElementById("list")
+            .querySelectorAll(".hidden");
+          for (let item of hidden) {
+            item
+              .classList
+              .remove("hidden");
+          }
           found = dictionary;
           sw = "";
           swl = 0;
-          $(".hideifsearching").each( (ind, el) => {
+          $(".hideifsearching").each((ind, el) => {
             $(el).show();
           });
+          $(".showifsearching").each((ind, el) => {
+            $(el).hide();
+          });
+        }
+      }
+
+      $(document).ready(function () {
+        // Scroll button
+        if (document.getElementById("scrollbutton") !== null) {
+          scrollFunction();
+          document
+            .getElementById("scrollbutton")
+            .addEventListener("click", () => {
+              document.body.scrollTop = 0; // For Safari
+              document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            })
+          window.addEventListener("scroll", scrollFunction);
+        }
+
+        // List filtering
+        if (document.getElementById("list")) {
+          var searchable = "";
+          if (document.getElementsByClassName("searchable").length > 0) {
+            searchable = ".searchable";
+          } else if (document.getElementsByClassName("handschrift").length > 0) {
+            searchable = ".handschrift";
+          }
+          createIndex("list", searchable);
+          $("input[name='keyword']").focus();
+          $("input[name='keyword']").keyup(search);
         }
       });
-    }
-  });
-  </script>
+    </script>
   </body>
 </html>

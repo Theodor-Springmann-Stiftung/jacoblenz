@@ -18,23 +18,24 @@ eleventyNavigation:
 
 
 <div class="sticky top-0 z-20">
-  <div class="z-10 bg-slate-100 px-4 py-2 self-start w-full">
-    <div class="w-full flex flex-row items-baseline">
-      <input class="grow p-0.5 my-1 mb-2 border border-slate-300" type="text" name="keyword" class="form-control input-sm" placeholder="Liste durchsuchen...">
-      <a class="shrink ml-2 px-1.5 py-0.5 border border-slate-400" id="scrollbutton" href="#top">↑&nbsp;nach oben</a>
-    </div>
-    {% set jahr = "" %}
-    {% set count = 1 %}
-    <div class="hideifsearching">
-      Springe:&nbsp;&nbsp;
-      {%- for post in collections.sekundaer -%}
-          {% if count % 80 == 0 and jahr !== post.data.Jahr %}
-              <a class="underline decoration-dotted" href="#{{ post.data.Jahr }}">{{ post.data.Jahr }}</a>&nbsp;&nbsp;
-              {% set jahr = post.data.Jahr %}
-          {% endif %}
-          {% set count = count + 1 %}
-      {%- endfor -%}
-    </div>
+  <div class="z-10 bg-slate-100 px-4 py-0.5 pt-1 self-start w-full flex flex-row items-baseline gap-x-3">
+      <div class="hideifsearching">
+        Jahr&nbsp;
+        <select class="bg-white px-1.5 pt-1.5 pb-1 border border-slate-300" onchange="window.location.href=this.value" >
+          {% set jahr = "" %}
+          {% set count = 0 %}
+          {%- for post in collections.sekundaer -%}
+            {% if count % 40 == 0 and jahr !== post.data.Jahr %}
+                <option value="#{{ post.data.Jahr }}">{{ post.data.Jahr }}</option>&nbsp;&nbsp;
+                {% set jahr = post.data.Jahr %}
+            {% endif %}
+            {% set count = count + 1 %}
+          {%- endfor -%}
+        </select>
+      </div>
+      <input class="grow p-0.5 px-1 my-1 mb-2 border border-slate-300" type="text" name="keyword" class="form-control input-sm" placeholder="Liste durchsuchen...">
+      <button class="bg-white shrink py-0.5 px-1.5 border border-slate-300 showifsearching" onclick="var input = this.previousElementSibling; input.value = ''; input.focus(); search();" alt="Clear the search form">Suche abbrechen</button>
+      <a class="bg-white shrink py-0.5 px-1.5 border border-slate-300" id="scrollbutton" href="#top">↑&nbsp;nach oben</a>
   </div>
 </div>
 

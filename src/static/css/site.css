@@ -110,7 +110,7 @@
     }
 
     .Kommentar {
-      @apply !indent-0 !pl-0 text-base
+      @apply !indent-0 !pl-0
     }
 
     .handschrift-sammlung .handschrift {
@@ -151,3 +151,14 @@
     max-height: calc(10rem + 100vh);
   }
 
+  .twocolumns {
+    columns: 2;
+  }
+
+  .Einzug {
+    break-inside: avoid;
+  }
+
+  .Kommentar {
+
+  }

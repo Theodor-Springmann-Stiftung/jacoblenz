@@ -105,4 +105,4 @@ dist
 
 # Eleventy output file
 dist/
-src/css/output.css
+src/static/css/output.css

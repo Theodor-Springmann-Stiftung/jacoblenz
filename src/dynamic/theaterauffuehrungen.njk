@@ -24,7 +24,7 @@ eleventyNavigation:
     <div class="hideifsearching">
       Springe:&nbsp;&nbsp;
       {%- for post in collections.theater -%}
-          {% if count % 1 == 0 and jahr !== post.data.Jahr %}
+          {% if count % 3 == 0 and jahr !== post.data.Jahr %}
               <a class="underline decoration-dotted" href="#{{ post.data.Jahr }}">{{ post.data.Jahr }}</a>&nbsp;&nbsp;
               {% set jahr = post.data.Jahr %}
           {% endif %}
