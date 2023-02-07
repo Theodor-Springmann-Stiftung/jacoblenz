@@ -24,7 +24,7 @@ eleventyNavigation:
     <div class="mb-4">
       <div class="feld">Druck</div> Die Angaben zum jeweiligen Druck der Handschriften dienen nur zur leichteren Orientierung, informieren mithin nicht über die Druckgeschichte (Erstdrucke, Teildrucke etc.). Bei den Briefen wird auf die Ausgabe von Freye/Stammler verwiesen (abgekürzt als „FSt“ mit Briefnummer) bzw. auf den jeweiligen Erstdruck für die dort nicht enthaltenen Korrespondenzstücke. Bei den Werken wird auf wechselnde Ausgaben oder Einzeldrucke verwiesen, und zwar nach Möglichkeit auf solche, deren Text auf der jeweils genannten Handschrift beruht (siehe dazu die nachfolgende Liste der abgekürzt zitierten Literatur).</div>
   </div>
-  <div class="rounded-md text-sm py-0.5 px-1.5 bg-slate-200 font-bold mb-1 mr-8">Abgekürzt zitierte Literatur</div>
+  <div class="text-xl font-bold mb-1.5">Abgekürzt zitierte Literatur</div>
   <div class="mb-4 literaturliste twocolumns pr-8">
     <ul>
       <li>
@@ -87,7 +87,7 @@ eleventyNavigation:
   <button class="showifsearching" onclick="var input = this.previousElementSibling; input.value = ''; input.focus(); search();" alt="Clear the search form">Suche abbrechen</button>
   <div class="hideifsearching">
         Ort&nbsp;
-        <select onchange="window.location.href=this.value" >
+        <select onchange="window.location.href=this.value" id="listselect">
       {% set ort = "" %}
       {% set count = 0 %}
       {%- for post in collections.handschriften -%}
@@ -99,7 +99,7 @@ eleventyNavigation:
       {%- endfor -%}
     </select>
   </div>
-  <button id="scrollbutton" href="#top">↑&nbsp;nach oben</button>
+  <button id="scrollbutton" href="#top">↑&nbsp;hoch</button>
 </div>
 
 <div class="mt-4 w-full" id="list">

@@ -113,7 +113,7 @@
       @apply ml-4
     }
 
-    .sidebar-nav .active {
+    .active {
       @apply font-bold
     }
 
@@ -193,12 +193,7 @@
   .sidebar-nav .active::before {
     content: "· ";
   }
-
-  aside {
-    min-height: 100vh;
-    max-height: calc(10rem + 100vh);
-  }
-
+  
   .twocolumns {
     columns: 2;
   }

@@ -18,7 +18,7 @@ eleventyNavigation:
       <button class="showifsearching" onclick="var input = this.previousElementSibling; input.value = ''; input.focus(); search();" alt="Clear the search form">Suche abbrechen</button>
       <div class="hideifsearching">
         Jahr&nbsp;
-        <select onchange="window.location.href=this.value" >
+        <select onchange="window.location.href=this.value" id="listselect">
           {% set jahr = "" %}
           {% set count = 0 %}
           {%- for post in collections.theater -%}
@@ -30,7 +30,7 @@ eleventyNavigation:
           {%- endfor -%}
         </select>
       </div>
-      <button id="scrollbutton" href="#top">↑&nbsp;nach oben</button>
+      <button id="scrollbutton" href="#top">↑&nbsp;hoch</button>
 </div>
 
 <div class="yearlist" id="list">

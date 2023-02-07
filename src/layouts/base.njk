@@ -42,31 +42,25 @@
     <meta name="twitter:domain" content="{% if image %}{{ image }}{% else %}{{ config.image }}{% endif %}">
 
   </head>
-  <body class="bg-slate-50 w-full h-full">
-    <div class="
-      px-12
-      max-w-screen-2xl
-      mx-auto
-      flex flex-row">
-      <aside class="shrink-0 grow-0 basis-[26rem] sticky top-0  max-h-screen min-h-screen flex flex-col bg-slate-50">
-        {% include "sidebar.njk" %}
-      </aside>
+  <body class="bg-slate-50 w-full h-full mx-auto flex flex-col
+      desktop:px-12 desktop:max-w-screen-2xl desktop:flex-row">
+    <aside class="flex flex-col shrink py-4 px-3
+      desktop:px-0 desktop:py-0
+      desktop:shrink-0 desktop:grow-0 desktop:basis-[26rem] desktop:sticky desktop:max-h-screen desktop:min-h-screen desktop:top-0 desktop:bg-slate-50">
+      {% include "bar.njk" %}
+    </aside>
 
-      <main class="px-8 pt-[7.5rem] min-h-full max-w-[1120px]">
-        <div>
-          <h2 class="text-3xl font-bold pb-4">
-            {{ title | safe }}
-          </h2>
-          {{ content | safe }}
-        </div>
-      </main>
-
-      {# <div class="row-start-3 col-span-6 self-end">
-      {% include "footer.njk" %}
-      </div> #}
-    </div>
+    <main class="px-8 desktop:pt-[7.5rem] pt-6 min-h-full max-w-[1120px] ">
+      <div>
+        <h2 class="text-3xl font-bold pb-4">
+          {{ title | safe }}
+        </h2>
+        {{ content | safe }}
+      </div>
+    </main>
 
     <script>
+
       // Script for showing and acting upon the "scroll to top button"
       const scrollFunction = function () {
         button = document.getElementById("scrollbutton");
@@ -89,9 +83,7 @@
 
       // Scripts for filtering lists
       let dictionary = [];
-      let categories = document
-        .getElementById("list")
-        .getElementsByClassName("category");
+      let categories = [];
       let found = dictionary;
       let sw = "";
       let swl = 0;
@@ -215,6 +207,19 @@
       }
 
       $(document).ready(function () {
+        // Mobile menu
+        var menubutton = document.getElementById("navigation-button");
+        var navigation = document.getElementById("navigation");
+        if (menubutton !== null && navigation !== null) {
+            menubutton.addEventListener("click", () => {
+              if (navigation.classList.contains("hidden")) {
+                navigation.classList.remove("hidden");
+              } else {
+                navigation.classList.add("hidden");
+              }
+            })
+        }
+
         // Scroll button
         if (document.getElementById("scrollbutton") !== null) {
           scrollFunction();
@@ -236,8 +241,31 @@
             searchable = ".handschrift";
           }
           createIndex("list", searchable);
+          categories = document.getElementById("list").getElementsByClassName("category");
           {# $("input[name='keyword']").focus(); #}
           $("input[name='keyword']").keyup(search);
+
+
+          let select = document.getElementById("listselect");
+          if (select !== null) {
+            var sections = {};
+            var i = 0;
+            Array.prototype.forEach.call(categories, function(e) {
+              sections[e.id] = e.offsetTop;
+            });
+            window.onscroll = function() {
+              var scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
+              for (i in sections) {
+                if (sections[i] <= scrollPosition) {
+                  var opt = select.querySelector('option[value="#' + i + '"]');
+                  console.log(opt);
+                  if (opt !== null) {
+                    opt.selected = true;
+                  }
+                }
+              }
+            };
+          }
         }
       });
     </script>

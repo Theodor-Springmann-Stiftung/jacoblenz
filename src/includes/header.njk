@@ -1,11 +1,17 @@
 
-<header>
-	<img class="px-12 pb-4 pt-8" src="/images/JLA.png" alt="jla-Logo">
+<header class="flex flex-row justify-between desktop:justify-start desktop:block">
+	<div class="flex flex-row desktop:block">
+	<img class="h-20 desktop:h-auto desktop:px-12 desktop:pb-4 desktop:pt-8" src="/images/JLA.png" alt="jla-Logo">
 	<h1 class="px-3 py-2 pb-4 text-5xl font-bold text-center">
 		{{ config.title }}
 	</h1>
-	<h2 class="py-2 border-t-gray-200 px-5 text-xl text-black bg-slate-200 border-l-4 border-slate-600 shadow-sm">
+	<h2 class="hidden desktop:block py-2 border-t-gray-200 px-5 text-xl text-black bg-slate-200 border-l-4 border-slate-600 shadow-sm">
 		{{ config.shortdescription }}
 		{# <br> Forschungsstelle zum Schriftsteller Jacob Michael Reinhold Lenz. #}
 	</h2>
+	</div>
+	<button class="border rounded-md w-16 h-16 desktop:hidden" id="navigation-button">
+		Menu
+	</div>
 </header>
+

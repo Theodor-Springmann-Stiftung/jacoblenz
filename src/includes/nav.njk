@@ -21,7 +21,7 @@
 </li>
 {%- endmacro %}
 
-<nav class="py-4 sidebar-nav px-4">
+<nav class="hidden desktop:block py-4 sidebar-nav px-4" id="navigation">
 <ul>
 {%- for entry in navPages %}{{ renderNavListItem(entry) }}{%- endfor -%}
 </ul>
