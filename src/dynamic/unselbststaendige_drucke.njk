@@ -31,11 +31,11 @@ eleventyNavigation:
 
 <div class="searchbar">
     <input type="text" name="keyword" class="form-control input-sm" placeholder="Liste durchsuchen...">
-    <button class="showifsearching" onclick="var input = this.previousElementSibling; input.value = ''; input.focus(); search();" alt="Clear the search form">Suche abbrechen</button>
+    <button class="showifsearching" onclick="searchreset();" alt="Clear the search form">Zurücksetzen</button>
     <button id="scrollbutton" href="#top">↑&nbsp;hoch</a>
 </div>
 
-<div class="mt-4" id="list">
+<div class="yearlist" id="list">
   {% set werk = "" %}
   {%- for post in collections.unselbststaendigedrucke -%}
     {% if post.data.Werk !== werk %}
@@ -44,11 +44,11 @@ eleventyNavigation:
         </div>
       {% endif %}
       {% set werk = post.data.Werk %}
-      <div class="flex flex-row mb-8 w-full category" id="{{ werk }}">
-      <div class="text-xl pl-3 pr-1 grow font-bold self-start z-0 sticky top-12 order-2" >{{ werk }}</div>
-      <div class="px-4 border-r-2 grow-0 shrink-0 w-[90ch] border-slate-400">
+      <div class="category !mb-12" id="{{ werk }}">
+      <div class="categorytitle grow-0 basis-1/5" >{{ werk }}</div>
+      <div class="categorybody grow shrink-0 basis-4/5">
     {% endif %}
-    <div class="mb-3 pl-6 -indent-6 searchable">{{ post.content | safe }}</div>
+    <div class="searchable">{{ post.content | safe }}</div>
   {%- endfor -%}
   </div>
   </div>

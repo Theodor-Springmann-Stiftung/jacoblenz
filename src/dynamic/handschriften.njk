@@ -25,7 +25,7 @@ eleventyNavigation:
       <div class="feld">Druck</div> Die Angaben zum jeweiligen Druck der Handschriften dienen nur zur leichteren Orientierung, informieren mithin nicht über die Druckgeschichte (Erstdrucke, Teildrucke etc.). Bei den Briefen wird auf die Ausgabe von Freye/Stammler verwiesen (abgekürzt als „FSt“ mit Briefnummer) bzw. auf den jeweiligen Erstdruck für die dort nicht enthaltenen Korrespondenzstücke. Bei den Werken wird auf wechselnde Ausgaben oder Einzeldrucke verwiesen, und zwar nach Möglichkeit auf solche, deren Text auf der jeweils genannten Handschrift beruht (siehe dazu die nachfolgende Liste der abgekürzt zitierten Literatur).</div>
   </div>
   <div class="text-xl font-bold mb-1.5">Abgekürzt zitierte Literatur</div>
-  <div class="mb-4 literaturliste twocolumns pr-8">
+  <div class="mb-4 literaturliste desktop:columns-2 pr-8">
     <ul>
       <li>
         <b>Blei 1909/13:</b> Jakob Michael Reinhold Lenz: Gesammelte Schriften. Hrsg. von Franz Blei. 5 Bde. München, Leipzig: Müller 1909-1913
@@ -84,7 +84,7 @@ eleventyNavigation:
 
 <div class="searchbar">
   <input type="text" name="keyword" class="form-control input-sm" placeholder="Liste durchsuchen...">
-  <button class="showifsearching" onclick="var input = this.previousElementSibling; input.value = ''; input.focus(); search();" alt="Clear the search form">Suche abbrechen</button>
+  <button class="showifsearching" onclick="searchreset();" alt="Clear the search form">Zurücksetzen</button>
   <div class="hideifsearching">
         Ort&nbsp;
         <select onchange="window.location.href=this.value" id="listselect">
@@ -102,11 +102,11 @@ eleventyNavigation:
   <button id="scrollbutton" href="#top">↑&nbsp;hoch</button>
 </div>
 
-<div class="mt-4 w-full" id="list">
+<div class="yearlist" id="list">
   {%- for post in collections.handschriften -%}
-    <div class="bg-slate-100 p-4 handschrift-sammlung flex flex-row mb-8 w-full category" id="{{ post.data.Ort | safe }}">
-      <div class="text-xl grow font-bold self-start z-0 sticky top-12 order-0 pr-4">{{ post.data.Ort | safe }}</div>
-      <div class="grow-0 shrink-0 w-[90ch] border-slate-400 flex flex-row flex-wrap gap-x-4 gap-y-5 justify-start">{{ post.content | safe }}</div>
+    <div class="category handschrift-sammlung !bg-slate-100 !py-5 !mb-12" id="{{ post.data.Ort | safe }}">
+      <div class="text-xl basis-1/5 font-bold self-start z-0 sticky top-14 pr-3 pl-3">{{ post.data.Ort | safe }}</div>
+      <div class=" basis-4/5 flex flex-col md:flex-row flex-wrap gap-x-4 gap-y-5 justify-start">{{ post.content | safe }}</div>
     </div>
   {%- endfor -%}
 </div>

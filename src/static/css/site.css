@@ -94,19 +94,23 @@
 
   @layer components {
     .searchbar {
-      @apply sticky top-0 z-20 bg-slate-100 px-4 py-0.5 pt-1.5 self-start w-full flex flex-row items-baseline gap-x-3
+      @apply sticky top-0 z-20 bg-slate-100 px-4 py-0.5 pt-1.5 self-start w-full sm:flex sm:flex-row items-baseline gap-x-3 border-b
     }
 
     .searchbar button {
-      @apply bg-white shrink py-0.5 px-1.5 border border-slate-300
+      @apply inline-block bg-white shrink py-0.5 px-1.5 border border-slate-300
     }
 
     .searchbar input {
-      @apply grow p-0.5 px-1 my-1 mb-2 border border-slate-300
+      @apply inline-block w-full sm:w-auto sm:grow p-0.5 px-1 my-1 mb-2 border border-slate-300
+    }
+
+    .hideifsearching {
+      @apply inline-block
     }
 
     .searchbar select {
-      @apply bg-white px-1.5 pt-1.5 pb-1 border border-slate-300
+      @apply inline-block bg-white px-1.5 pt-1.5 pb-1 border border-slate-300
     }
 
     .sidebar-nav li li {
@@ -117,32 +121,36 @@
       @apply font-bold
     }
 
+    .sidebar-nav .active::before {
+      @apply text-lenz-6-highlight
+    }
+
     .yearlist {
-      @apply mt-4
+      @apply mt-4 w-full
     }
 
     .yearlist .category .categorytitle {
-      @apply text-xl pr-1 pl-3 py-2 grow-0 min-w-[4rem] font-bold self-start z-0 sticky top-12 order-2
+      @apply text-xl pr-1 pl-3 grow-0 min-w-[4rem] font-bold self-start z-0 sticky top-14 sm:order-2
     }
 
     .yearlist .category .categorybody {
-      @apply px-4 border-r-2 grow py-2 border-slate-400
+      @apply sm:px-4 sm:border-r-2 grow md:border-lenz-12-lighterblue
     }
 
     .yearlist .category {
-      @apply flex flex-row w-full
+      @apply flex flex-col sm:flex-row w-full mb-5
     }
 
     .yearlist .searchable {
-      @apply mb-3 px-4 pl-6 -indent-6 
+      @apply mt-3 px-4 pl-6 -indent-6 
+    }
+
+    .yearlist .searchable:first-of-type {
+      @apply mt-0
     }
 
     .maincolumn {
       @apply basis-4/5 grow-0
-    }
-
-    .Einzug {
-      
     }
 
     .Kommentar {
@@ -150,7 +158,7 @@
     }
 
     .handschrift-sammlung .handschrift {
-      @apply border basis-[31.5%] shrink-0 bg-white
+      @apply border md:basis-[48%] xl:basis-[31.5%] shrink-0 bg-white py-1
     }
 
     .handschrift-sammlung .ueberschrift-gruppe {
@@ -174,7 +182,7 @@
     }
 
     .literaturliste li {
-      @apply pl-6 -indent-6 
+      @apply pl-6 -indent-6
     }
 
     .legende .feld {
@@ -194,6 +202,7 @@
     content: "· ";
   }
   
+
   .twocolumns {
     columns: 2;
   }

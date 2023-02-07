@@ -34,17 +34,18 @@ module.exports = {
         'print': { 'raw': 'print' },
       },
       colors: {
-        'lenzHighlight': '#c00902',
-        'hamannLightHighlight': '#cc7878',
-        'hamannSlate': {
-          50: '#6A829E',
-          100: '#416C9E',
-          200: '#3F8FEB',
-          300: '#3270B8',
-          500: '#2B619E',
-          700: '#1E4570',
-          900: '#173557'
-        }
+        'lenz-12-lighterblue': '#1f4060',
+        'lenz-11-blue': '#13213f',
+        'lenz-10-darkblue': '#110a25',
+        'lenz-9-winered': '#290b22',
+        'lenz-8-darkred': '#491122',
+        'lenz-7-red': '#711824',
+        'lenz-6-highlight': '#9b1e24',
+        'lenz-5-pink': '#bc3047',
+        'lenz-4-rose': '#c95873',
+        'lenz-3-lightrose': '#cf899d',
+        'lenz-2-lightred': '#dab5c1',
+        'lenz-1-greyred': '#eadce1',
       }
     },
   },

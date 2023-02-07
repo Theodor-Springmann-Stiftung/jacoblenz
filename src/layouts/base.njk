@@ -42,10 +42,10 @@
     <meta name="twitter:domain" content="{% if image %}{{ image }}{% else %}{{ config.image }}{% endif %}">
 
   </head>
-  <body class="bg-slate-50 w-full h-full mx-auto flex flex-col
+  <body class="bg-slate-50 mx-auto flex flex-col
       desktop:px-12 desktop:max-w-screen-2xl desktop:flex-row">
-    <aside class="flex flex-col shrink py-4 px-3
-      desktop:px-0 desktop:py-0
+    <aside class="flex flex-col shrink py-4 px-3 w-full
+      desktop:px-0 desktop:py-0 desktop:w-auto
       desktop:shrink-0 desktop:grow-0 desktop:basis-[26rem] desktop:sticky desktop:top-0 desktop:max-h-screen desktop:min-h-screen  desktop:bg-slate-50">
       {% include "bar.njk" %}
     </aside>
@@ -115,7 +115,19 @@
         })
       }
 
-      const search = function () {
+      const search = function (evt) {
+        evt = evt || window.event;
+        var isEscape = false;
+        if ("key" in evt) {
+          isEscape = (evt.key === "Escape" || evt.key === "Esc");
+        } else {
+          isEscape = (evt.keyCode === 27);
+        }
+        if (isEscape) { 
+          searchreset();
+          return;
+        }
+
         term = $("input[name='keyword']")
           .val()
           .trim() || '';
@@ -186,24 +198,36 @@
           sw = term;
           swl = term.length;
         } else {
-          var hidden = document
-            .getElementById("list")
-            .querySelectorAll(".hidden-important");
-          for (let item of hidden) {
-            item
-              .classList
-              .remove("hidden-important");
-          }
-          found = dictionary;
-          sw = "";
-          swl = 0;
-          $(".hideifsearching").each((ind, el) => {
-            $(el).show();
-          });
-          $(".showifsearching").each((ind, el) => {
-            $(el).hide();
-          });
+          searchreset();
         }
+      }
+
+      const searchreset = function() {
+        for (let item of found) {
+          $(item.element).unmark();
+        }
+
+        var hidden = document
+          .getElementById("list")
+          .querySelectorAll(".hidden-important");
+        for (let item of hidden) {
+          item
+            .classList
+            .remove("hidden-important");
+        }
+        found = dictionary;
+        sw = "";
+        swl = 0;
+        $(".hideifsearching").each((ind, el) => {
+          $(el).show();
+        });
+        $(".showifsearching").each((ind, el) => {
+          $(el).hide();
+        });
+
+        var input =  document.querySelector("input[name='keyword']"); 
+        input.value = ''; 
+        input.focus();
       }
 
       $(document).ready(function () {
@@ -211,13 +235,17 @@
         var menubutton = document.getElementById("navigation-button");
         var navigation = document.getElementById("navigation");
         if (menubutton !== null && navigation !== null) {
-            menubutton.addEventListener("click", () => {
-              if (navigation.classList.contains("hidden")) {
-                navigation.classList.remove("hidden");
-              } else {
-                navigation.classList.add("hidden");
-              }
-            })
+          menubutton.addEventListener("click", () => {
+            if (navigation.classList.contains("hidden")) {
+              navigation
+                .classList
+                .remove("hidden");
+            } else {
+              navigation
+                .classList
+                .add("hidden");
+            }
+          })
         }
 
         // Scroll button
@@ -241,24 +269,28 @@
             searchable = ".handschrift";
           }
           createIndex("list", searchable);
-          categories = document.getElementById("list").getElementsByClassName("category");
+          categories = document
+            .getElementById("list")
+            .getElementsByClassName("category");
           {# $("input[name='keyword']").focus(); #}
           $("input[name='keyword']").keyup(search);
 
-
+          // Scrolling & List updating
           let select = document.getElementById("listselect");
           if (select !== null) {
             var sections = {};
             var i = 0;
-            Array.prototype.forEach.call(categories, function(e) {
-              sections[e.id] = e.offsetTop;
-            });
-            window.onscroll = function() {
+            Array
+              .prototype
+              .forEach
+              .call(categories, function (e) {
+                sections[e.id] = e.offsetTop;
+              });
+            window.onscroll = function () {
               var scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
               for (i in sections) {
                 if (sections[i] <= scrollPosition) {
                   var opt = select.querySelector('option[value="#' + i + '"]');
-                  console.log(opt);
                   if (opt !== null) {
                     opt.selected = true;
                   }
