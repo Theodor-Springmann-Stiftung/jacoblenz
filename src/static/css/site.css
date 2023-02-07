@@ -93,12 +93,48 @@
   }
 
   @layer components {
+    .searchbar {
+      @apply sticky top-0 z-20 bg-slate-100 px-4 py-0.5 pt-1.5 self-start w-full flex flex-row items-baseline gap-x-3
+    }
+
+    .searchbar button {
+      @apply bg-white shrink py-0.5 px-1.5 border border-slate-300
+    }
+
+    .searchbar input {
+      @apply grow p-0.5 px-1 my-1 mb-2 border border-slate-300
+    }
+
+    .searchbar select {
+      @apply bg-white px-1.5 pt-1.5 pb-1 border border-slate-300
+    }
+
     .sidebar-nav li li {
       @apply ml-4
     }
 
     .sidebar-nav .active {
       @apply font-bold
+    }
+
+    .yearlist {
+      @apply mt-4
+    }
+
+    .yearlist .category .categorytitle {
+      @apply text-xl pr-1 pl-3 py-2 grow-0 min-w-[4rem] font-bold self-start z-0 sticky top-12 order-2
+    }
+
+    .yearlist .category .categorybody {
+      @apply px-4 border-r-2 grow py-2 border-slate-400
+    }
+
+    .yearlist .category {
+      @apply flex flex-row w-full
+    }
+
+    .yearlist .searchable {
+      @apply mb-3 px-4 pl-6 -indent-6 
     }
 
     .maincolumn {
@@ -130,12 +166,24 @@
     }
 
     .handschrift-sammlung .feld {
-      @apply rounded-md inline text-sm mr-1 px-2 py-0.5 bg-slate-200 font-bold
+      @apply rounded-md text-sm mr-1 px-2 py-0.5 bg-slate-200 font-bold
     }
 
     .handschrift-sammlung .wert {
       @apply py-0.5 px-1
     }
+
+    .literaturliste li {
+      @apply pl-6 -indent-6 
+    }
+
+    .legende .feld {
+      @apply rounded-md text-sm py-0.5 bg-slate-200 font-bold px-1.5 mb-1
+    }
+  }
+
+  .hidden-important {
+    display: none !important;
   }
 
   .hyphenation {
@@ -155,7 +203,7 @@
     columns: 2;
   }
 
-  .Einzug {
+  .avoidbreak {
     break-inside: avoid;
   }
 

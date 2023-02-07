@@ -8,7 +8,7 @@ eleventyNavigation:
   pdf: no
 ---
 
-<div class="border-black px-4 py-3 mb-4 order-2 hyphenation bg-gray-100 w-full">
+<div class="mb-4 hyphenation w-full">
     <p class="mb-4 max-w-[80ch]">Die zu Lebzeiten von Lenz erschienenen unselbständigen Drucke seiner Texte sind alphabetisch nach den Titeln der Publikationsorgane angeordnet. Wo es sich um Wiederabdrucke handelt, ist dies mit Verweis auf den entsprechenden Erstdruck angegeben.
 
     <p class="mb-4 max-w-[80ch]"> Die bibliographischen Angaben zu den Publikationsorganen folgen den jeweiligen Titelblättern, wobei zunächst der Haupt-, Band- oder Jahrgangstitel und sodann ggf. der Neben- oder Stücktitel angeführt wird. Der Zeilenfall bei den Titeln der Zeitschriften etc. ist nicht markiert; bei den Werktiteln ist er nur dort vermerkt, wo andernfalls Mißverständnisse möglich wären.
@@ -29,24 +29,23 @@ eleventyNavigation:
   {%- endfor -%}
 </div>
 
-<div class="sticky top-0 z-20">
-  <div class="flex flex-row z-10 bg-slate-100 px-4 py-2 self-start w-full items-baseline">
-    <input class="grow ml-2 p-0.5 pl-1 my-1 mb-2 border border-slate-300" type="text" name="keyword" class="form-control input-sm" placeholder="Liste durchsuchen...">
-    <a class="shrink ml-2 px-1.5 py-0.5 border border-slate-400" id="scrollbutton" href="#top">↑&nbsp;nach oben</a>
-  </div>
+<div class="searchbar">
+    <input type="text" name="keyword" class="form-control input-sm" placeholder="Liste durchsuchen...">
+    <button class="showifsearching" onclick="var input = this.previousElementSibling; input.value = ''; input.focus(); search();" alt="Clear the search form">Suche abbrechen</button>
+    <button id="scrollbutton" href="#top">↑&nbsp;nach oben</a>
 </div>
 
 <div class="mt-4" id="list">
-  {% set jahr = "" %}
+  {% set werk = "" %}
   {%- for post in collections.unselbststaendigedrucke -%}
-    {% if post.data.Werk !== jahr %}
-      {% if jahr !== "" %}
+    {% if post.data.Werk !== werk %}
+      {% if werk !== "" %}
         </div>
         </div>
       {% endif %}
-      {% set jahr = post.data.Werk %}
-      <div class="flex flex-row mb-8 w-full category" id="{{ jahr }}">
-      <div class="text-xl pl-3 pr-1 grow font-bold self-start z-0 sticky top-16 order-2" >{{ jahr }}</div>
+      {% set werk = post.data.Werk %}
+      <div class="flex flex-row mb-8 w-full category" id="{{ werk }}">
+      <div class="text-xl pl-3 pr-1 grow font-bold self-start z-0 sticky top-12 order-2" >{{ werk }}</div>
       <div class="px-4 border-r-2 grow-0 shrink-0 w-[90ch] border-slate-400">
     {% endif %}
     <div class="mb-3 pl-6 -indent-6 searchable">{{ post.content | safe }}</div>
@@ -54,38 +53,3 @@ eleventyNavigation:
   </div>
   </div>
 </div>
-
-
-{# <div class="z-10 bg-emerald-100 px-4 py-2 mb-4 w-full">
-{% set jahr = "" %}
-{% set count = 1 %}
-Veröffentlichungen in:&nbsp;&nbsp;
-{%- for post in collections.unselbststaendigedrucke -%}
-    {% if post.data.Werk !== jahr %}
-      {% if count % 1 == 0 %}
-        <a class="hyphenation px-2 bg-gray-700 text-emerald-100 underline decoration-dotted" href="#{{ post.data.Werk }}">{{ post.data.Werk }}</a>&nbsp;&nbsp;
-      {% endif %}
-      {% set jahr = post.data.Werk %}
-      {% set count = count + 1 %}
-    {% endif %}
-{%- endfor -%}
-</div>
-
-<div>
-  {% set jahr = "" %}
-  {%- for post in collections.unselbststaendigedrucke -%}
-    {% if post.data.Werk !== jahr %}
-      {% if jahr !== "" %}
-        </div>
-        </div>
-      {% endif %}
-      {% set jahr = post.data.Werk %}
-      <div class="flex flex-row mb-8 w-full">
-      <div class="text-xl pl-3 pr-1 grow font-bold self-start z-0 sticky top-4 order-2" id="{{ jahr }}">{{ jahr }}</div>
-      <div class="px-4 border-r-2 grow-0 shrink-0 w-[90ch] border-slate-400">
-    {% endif %}
-    <div class="mb-3 pl-6 -indent-6 max-w-[90ch]">{{ post.content | safe }}</div>
-  {%- endfor -%}
-  </div>
-  </div>
-</div> #}

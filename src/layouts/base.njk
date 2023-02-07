@@ -76,13 +76,13 @@
             button.style.pointerEvents = "auto";
             button
               .classList
-              .remove("hidden");
+              .remove("hidden-important");
           } else {
             // button.style.display = "none";
             button.style.pointerEvents = "none";
             button
               .classList
-              .add("hidden");
+              .add("hidden-important");
           }
         }
       }
@@ -151,7 +151,10 @@
           for (let cat of categories) {
             cat
               .classList
-              .add("hidden");
+              .add("hidden-important");
+            cat
+              .classList
+              .remove("search-expanded");
           }
 
           // Only search in prior found elements if word starts the same
@@ -170,11 +173,11 @@
               item
                 .category
                 .classList
-                .remove("hidden");
+                .remove("hidden-important");
               item
                 .element
                 .classList
-                .remove("hidden");
+                .remove("hidden-important");
               if (term.length >= 2) {
                 $(item.element).mark(term, {
                   "separateWordSearch": false,
@@ -185,7 +188,7 @@
               item
                 .element
                 .classList
-                .add("hidden");
+                .add("hidden-important");
             }
           }
           sw = term;
@@ -193,11 +196,11 @@
         } else {
           var hidden = document
             .getElementById("list")
-            .querySelectorAll(".hidden");
+            .querySelectorAll(".hidden-important");
           for (let item of hidden) {
             item
               .classList
-              .remove("hidden");
+              .remove("hidden-important");
           }
           found = dictionary;
           sw = "";
@@ -233,7 +236,7 @@
             searchable = ".handschrift";
           }
           createIndex("list", searchable);
-          $("input[name='keyword']").focus();
+          {# $("input[name='keyword']").focus(); #}
           $("input[name='keyword']").keyup(search);
         }
       });

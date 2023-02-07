@@ -8,7 +8,7 @@ eleventyNavigation:
 ---
 
 
-<div class="border-black px-4 py-3 mb-4 order-2 hyphenation bg-gray-100 w-full">
+<div class="mb-4 hyphenation w-full">
     <p class="mb-4 max-w-[80ch]">Grundlage für das Verzeichnis sind v. a. die Lenz-Bibliographien von Wolfgang Stammler (1916), David Price Benseler (1971), Takeshi Imamura (1996), die Bibliographien des Lenz-Jahrbuchs 17, 20, 24 und 26 von Nikola Roßbach, Ariane Martin und Constanze Baum sowie die Bibliographie im Lenz-Handbuch (2017). Einbezogen sind auch die MLA International Bibliography und die Bibliographie der deutschen Sprach- und Literaturwissenschaft. Das Verzeichnis wird laufend weiter ausgebaut und überarbeitet. 
 
     <p class="mb-4 max-w-[80ch]">Nur in Auswahl aufgenommen sind bisher Lenz-Artikel in Literaturgeschichten und Lexika, Beiträge zur produktiven Lenz-Rezeption in der Literatur und auf dem (Musik-)Theater sowie Kritiken zu Theateraufführungen von Lenz’ Stücken.
@@ -17,12 +17,12 @@ eleventyNavigation:
 </div>
 
 
-<div class="sticky top-0 z-20">
-  <div class="z-10 bg-slate-100 px-4 py-0.5 pt-1.5 self-start w-full flex flex-row items-baseline gap-x-3">
-      <input class="grow p-0.5 px-1 my-1 mb-2 border border-slate-300" type="text" name="keyword" class="form-control input-sm" placeholder="Liste durchsuchen...">
+<div class="searchbar">
+      <input type="text" name="keyword" class="form-control input-sm" placeholder="Liste durchsuchen...">
+      <button class="showifsearching" onclick="var input = this.previousElementSibling; input.value = ''; input.focus(); search();" alt="Clear the search form">Suche abbrechen</button>
       <div class="hideifsearching">
         Jahr&nbsp;
-        <select class="bg-white px-1.5 pt-1.5 pb-1 border border-slate-300" onchange="window.location.href=this.value" >
+        <select onchange="window.location.href=this.value" >
           {% set jahr = "" %}
           {% set count = 0 %}
           {%- for post in collections.sekundaer -%}
@@ -34,12 +34,10 @@ eleventyNavigation:
           {%- endfor -%}
         </select>
       </div>
-      <button class="bg-white shrink py-0.5 px-1.5 border border-slate-300 showifsearching" onclick="var input = this.previousElementSibling; input.value = ''; input.focus(); search();" alt="Clear the search form">Suche abbrechen</button>
-      <a class="bg-white shrink py-0.5 px-1.5 border border-slate-300" id="scrollbutton" href="#top">↑&nbsp;nach oben</a>
-  </div>
+      <button id="scrollbutton" href="#top">↑&nbsp;nach oben</button>
 </div>
 
-<div class="mt-4" id="list">
+<div class="yearlist" id="list">
   {% set jahr = "" %}
   {%- for post in collections.sekundaer -%}
     {% if post.data.Jahr !== jahr %}
@@ -48,11 +46,11 @@ eleventyNavigation:
         </div>
       {% endif %}
       {% set jahr = post.data.Jahr %}
-      <div class="flex flex-row w-full category" id="{{ jahr }}">
-      <div class="text-xl pr-1 pl-3 py-2 grow-0 min-w-[4rem] font-bold self-start z-0 sticky top-20 order-2" >{{ jahr }}</div>
-      <div class="px-4 border-r-2 grow py-2 border-slate-400">
+      <div class="category" id="{{ jahr }}">
+      <div class="categorytitle" >{{ jahr }}</div>
+      <div class="categorybody">
     {% endif %}
-    <div class="mb-3 pl-6 -indent-6 searchable">{{ post.content | safe }}</div>
+    <div class="searchable">{{ post.content | safe }}</div>
   {%- endfor -%}
   </div>
   </div>
