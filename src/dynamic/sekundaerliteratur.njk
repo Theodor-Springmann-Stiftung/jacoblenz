@@ -1,10 +1,10 @@
 ---
-title: Forschungsbibliographie & Übersetzungen
-description: Forschungsliteratur und Übersetzungen zu Leben und Werk von Jacob Michael Reinhold Lenz
+title: Forschungsbibliographie
+description: Forschungsliteratur zu Leben und Werk von Jacob Michael Reinhold Lenz
 eleventyNavigation:
   key: Forschungsbibliographie
   parent: Verzeichnisse
-  order: 5
+  order: 6
 ---
 
 
@@ -24,6 +24,7 @@ eleventyNavigation:
         Jahr&nbsp;
         <select onchange="window.location.href=this.value" id="listselect">
           {% set jahr = "" %}
+          {% set currjahr = "" %}
           {% set count = 0 %}
           {%- for post in collections.sekundaer -%}
             {% if count % 50 == 0 and jahr !== post.data.Jahr %}
@@ -31,7 +32,11 @@ eleventyNavigation:
                 {% set jahr = post.data.Jahr %}
             {% endif %}
             {% set count = count + 1 %}
+            {% set currjahr = post.data.Jahr %}
           {%- endfor -%}
+          {%- if currjahr !== jahr %}
+            <option value="#{{ currjahr }}">{{ currjahr }}</option>
+          {%- endif -%}
         </select>
       </div>
       <button id="scrollbutton" href="#top">↑&nbsp;hoch</button>

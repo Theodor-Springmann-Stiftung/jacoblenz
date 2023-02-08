@@ -1,0 +1,47 @@
+---
+title: Übersetzungen
+description: Übersetzungen von Werken von Jacob Michael Reinhold Lenz
+eleventyNavigation:
+  key: Übersetzungen
+  parent: Verzeichnisse
+  order: 5
+---
+
+<div class="searchbar">
+      <input type="text" name="keyword" class="form-control input-sm" placeholder="Liste durchsuchen...">
+      <button class="showifsearching" onclick="searchreset();" alt="Clear the search form">Zurücksetzen</button>
+      <div class="hideifsearching">
+        Sprache&nbsp;
+        <select onchange="window.location.href=this.value" id="listselect">
+          {% set sprache = "" %}
+          {% set count = 0 %}
+          {%- for post in collections.uebersetzungen -%}
+            {% if count % 1 == 0 and sprache !== post.data.Sprache %}
+                <option value="#{{ post.data.Sprache }}">{{ post.data.Sprache }}</option>
+                {% set sprache = post.data.Sprache %}
+            {% endif %}
+            {% set count = count + 1 %}
+          {%- endfor -%}
+        </select>
+      </div>
+      <button id="scrollbutton" href="#top">↑&nbsp;hoch</button>
+</div>
+
+<div class="yearlist" id="list">
+  {% set sprache = "" %}
+  {%- for post in collections.uebersetzungen -%}
+    {% if post.data.Sprache !== sprache %}
+      {% if sprache !== "" %}
+        </div>
+        </div>
+      {% endif %}
+      {% set sprache = post.data.Sprache %}
+      <div class="category" id="{{ sprache }}">
+      <div class="categorytitle !basis-2/12" >{{ sprache }}</div>
+      <div class="categorybody">
+    {% endif %}
+    <div class="searchable">{{ post.content | safe }}</div>
+  {%- endfor -%}
+  </div>
+  </div>
+</div>

@@ -45,7 +45,7 @@ eleventyNavigation:
       {% endif %}
       {% set werk = post.data.Werk %}
       <div class="category !mb-12" id="{{ werk }}">
-      <div class="categorytitle grow-0 basis-1/5" >{{ werk }}</div>
+      <div class="categorytitle grow-0 !basis-1/5" >{{ werk }}</div>
       <div class="categorybody grow shrink-0 basis-4/5">
     {% endif %}
     <div class="searchable">{{ post.content | safe }}</div>

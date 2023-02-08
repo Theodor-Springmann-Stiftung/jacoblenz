@@ -2,6 +2,21 @@ const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 
 module.exports = function (config) {
 
+    config.addCollection("uebersetzungen", function(collectionApi) {
+        return collectionApi
+            .getFilteredByGlob("**/lists/uebersetzungen/*.html")
+            .sort(function(a, b) {
+                if (a.data.Sprache !== null && b.data.Sprache !== null &&
+                        a.data.Sprache !== b.data.Sprache) {
+                    return a.data.Sprache.localeCompare(b.data.Sprache);
+                } else if (a.data.Sort !== null && b.data.Sort !== null &&
+                        a.data.Sort !== b.data.Sort) {
+                    return a.data.Sort - b.data.Sort;
+                }
+                return 0;
+            });
+    });
+
     config.addCollection("sekundaer", function(collectionApi) {
         return collectionApi
             .getFilteredByGlob("**/lists/sekundaerliteratur/*.html")

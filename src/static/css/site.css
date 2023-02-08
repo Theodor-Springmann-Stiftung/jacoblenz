@@ -130,7 +130,7 @@
     }
 
     .yearlist .category .categorytitle {
-      @apply text-xl pr-1 pl-3 grow-0 min-w-[4rem] font-bold self-start z-0 sticky top-14 sm:order-2
+      @apply text-xl pr-1 pl-3 min-w-[4rem] font-bold self-start z-0 sticky top-14 sm:order-2 shrink-0 grow-0 basis-1/12
     }
 
     .yearlist .category .categorybody {
