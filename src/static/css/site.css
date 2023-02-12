@@ -218,6 +218,36 @@
     .legende .feld {
       @apply rounded-md text-sm py-0.5 bg-slate-200 font-bold px-1.5 mb-1
     }
+
+    .timeline {
+      @apply sm:grid sm:grid-cols-12 grid-flow-row max-w-[90ch]
+    }
+
+    .timeline .time {
+      @apply col-span-1 py-1.5 font-bold sm:text-right px-2 mt-2.5 sm:mt-0
+    }
+
+    .timeline .entry {
+      @apply col-span-11 sm:px-3 sm:py-1.5 px-2
+    }
+
+    .timeline>div:nth-child(4n+1),
+    .timeline>div:nth-child(4n+2)
+    {
+      @apply bg-slate-200
+    }
+
+    .legende table tr:nth-child(2n-1) {
+      @apply bg-slate-100
+    }
+
+    .legende table td:nth-child(1) {
+      @apply text-right px-1 border-r-2 border-slate-200
+    }
+
+    .legende table td {
+      @apply px-1.5
+    }
   }
 
   .hidden-important {
