@@ -203,8 +203,8 @@
       @apply text-xl font-bold
     }
 
-    .handschrift-sammlung .feld {
-      @apply rounded-md text-sm mr-1 bg-slate-200 font-bold px-1.5
+    .feld {
+      @apply rounded-md text-sm mr-1 bg-slate-200 font-bold px-1.5 mb-0.5 max-w-[90ch]
     }
 
     .handschrift-sammlung .wert {
@@ -213,10 +213,6 @@
 
     .literaturliste li {
       @apply pl-6 -indent-6
-    }
-
-    .legende .feld {
-      @apply rounded-md text-sm py-0.5 bg-slate-200 font-bold px-1.5 mb-1
     }
 
     .timeline {
@@ -247,6 +243,10 @@
 
     .legende table td {
       @apply px-1.5
+    }
+
+    .maincolumn p {
+      @apply max-w-[85ch] hyphenation mb-4
     }
   }
 
