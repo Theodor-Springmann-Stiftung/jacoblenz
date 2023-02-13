@@ -55,7 +55,7 @@ module.exports = function (config) {
 
     config.addCollection("selbststaendigedrucke", function(collectionApi) {
         return collectionApi
-            .getFilteredByGlob("**/lists/selbstaendige_drucke/*.html")
+            .getFilteredByGlob("**/lists/selbststaendige_drucke/*.html")
             .sort(function(a, b) {
                 if (a.data.Jahr !== null && b.data.Jahr !== null &&
                         a.data.Jahr !== b.data.Jahr) {
