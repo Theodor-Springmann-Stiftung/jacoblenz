@@ -26,13 +26,13 @@ eleventyNavigation:
           {% set jahr = "" %}
           {% set currjahr = "" %}
           {% set count = 0 %}
-          {%- for post in collections.sekundaer -%}
-            {% if count % 50 == 0 and jahr !== post.data.Jahr %}
-                <option value="#{{ post.data.Jahr }}">{{ post.data.Jahr }}</option>
-                {% set jahr = post.data.Jahr %}
+          {%- for entry in collections.sekundaer -%}
+            {% if count % 50 == 0 and jahr !== entry.data.Jahr %}
+                <option value="#{{ entry.data.Jahr }}">{{ entry.data.Jahr }}</option>
+                {% set jahr = entry.data.Jahr %}
             {% endif %}
             {% set count = count + 1 %}
-            {% set currjahr = post.data.Jahr %}
+            {% set currjahr = entry.data.Jahr %}
           {%- endfor -%}
           {%- if currjahr !== jahr %}
             <option value="#{{ currjahr }}">{{ currjahr }}</option>
@@ -44,18 +44,18 @@ eleventyNavigation:
 
 <div class="yearlist" id="list">
   {% set jahr = "" %}
-  {%- for post in collections.sekundaer -%}
-    {% if post.data.Jahr !== jahr %}
+  {%- for entry in collections.sekundaer -%}
+    {% if entry.data.Jahr !== jahr %}
       {% if jahr !== "" %}
         </div>
         </div>
       {% endif %}
-      {% set jahr = post.data.Jahr %}
+      {% set jahr = entry.data.Jahr %}
       <div class="category" id="{{ jahr }}">
       <div class="categorytitle" >{{ jahr }}</div>
       <div class="categorybody">
     {% endif %}
-    <div class="searchable">{{ post.content | safe }}</div>
+    <div class="searchable">{{ entry.content | safe }}</div>
   {%- endfor -%}
   </div>
   </div>

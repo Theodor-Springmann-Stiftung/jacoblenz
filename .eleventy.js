@@ -2,6 +2,42 @@ const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 
 module.exports = function (config) {
 
+    // Configures the development server
+    config.setServerOptions({
+        // Default values are shown:
+    
+        // Whether the live reload snippet is used
+        liveReload: true,
+    
+        // Whether DOM diffing updates are applied where possible instead of page reloads
+        domDiff: true,
+    
+        // The starting port number
+        // Will increment up to (configurable) 10 times if a port is already in use.
+        port: 8080,
+    
+        // Additional files to watch that will trigger server updates
+        // Accepts an Array of file paths or globs (passed to `chokidar.watch`).
+        // Works great with a separate bundler writing files to your output folder.
+        // e.g. `watch: ["_site/**/*.css"]`
+        watch: [],
+    
+        // Show local network IP addresses for device testing
+        showAllHosts: true,
+    
+        // Use a local key/certificate to opt-in to local HTTP/2 with https
+        https: {
+          // key: "./localhost.key",
+          // cert: "./localhost.cert",
+        },
+    
+        // Change the default file encoding for reading/serving files
+        encoding: "utf-8",
+    });
+
+
+    // Collections: Übersetzungen, Sekundärliteratur, Theateraufführungen, Selbstständige und unselbstständige Drucke, Poshume Ausgaben, Forschungbibliografie
+    // Reads in the Collections based on folder name and sorts them according to the rules provided by the function
     config.addCollection("uebersetzungen", function(collectionApi) {
         return collectionApi
             .getFilteredByGlob("**/lists/uebersetzungen/*.html")
@@ -116,44 +152,11 @@ module.exports = function (config) {
             });
     });
 
-
-    config.setServerOptions({
-        // Default values are shown:
-    
-        // Whether the live reload snippet is used
-        liveReload: true,
-    
-        // Whether DOM diffing updates are applied where possible instead of page reloads
-        domDiff: true,
-    
-        // The starting port number
-        // Will increment up to (configurable) 10 times if a port is already in use.
-        port: 8080,
-    
-        // Additional files to watch that will trigger server updates
-        // Accepts an Array of file paths or globs (passed to `chokidar.watch`).
-        // Works great with a separate bundler writing files to your output folder.
-        // e.g. `watch: ["_site/**/*.css"]`
-        watch: [],
-    
-        // Show local network IP addresses for device testing
-        showAllHosts: true,
-    
-        // Use a local key/certificate to opt-in to local HTTP/2 with https
-        https: {
-          // key: "./localhost.key",
-          // cert: "./localhost.cert",
-        },
-    
-        // Change the default file encoding for reading/serving files
-        encoding: "utf-8",
-    });
-
     // Uses the semi-official "navigation"-plugin for eleventy 
     config.addPlugin(eleventyNavigationPlugin);
     
     // Set static folder, which copntent will be copied to the output folder
-    config.addPassthroughCopy({ "src/static/": "/" });
+    config.addPassthroughCopy({ "src/static/": "/static/" });
 
     return { 
         // Set custom directories for dynamic pages, data, includes, layouts and finally the generated output
