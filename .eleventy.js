@@ -158,6 +158,12 @@ module.exports = function (config) {
     // Set static folder, which copntent will be copied to the output folder
     config.addPassthroughCopy({ "src/static/": "/static/" });
 
+    // Output directory
+    var outputdir = "site";
+    if (process.env.ELEVENTY_ENVIRONMENT == "production") {
+        outputdir = "dist";
+    }
+
     return { 
         // Set custom directories for dynamic pages, data, includes, layouts and finally the generated output
         dir: 
@@ -166,7 +172,7 @@ module.exports = function (config) {
                 layouts: "../layouts",
                 includes: "../includes", 
                 data: "../data", 
-                output: "dist" 
+                output: outputdir 
             },
             
         // Set template formats so that other files won't be included in dist
