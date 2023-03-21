@@ -123,9 +123,21 @@ eleventyNavigation:
 
 <div class="yearlist" id="list">
   {%- for post in collections.handschriften -%}
-    <div class="category handschrift-sammlung !bg-slate-100 !py-5 !mb-12" id="{{ post.data.Ort | safe }}">
-      <div class="text-xl basis-1/5 font-bold self-start z-0 sticky top-14 pr-3 pl-3">{{ post.data.Ort | safe }}</div>
-      <div class=" basis-4/5 flex flex-col sm:flex-row flex-wrap gap-x-4 gap-y-5 justify-start">{{ post.content | safe }}</div>
+    <div class="category handschrift-sammlung !bg-slate-100 !py-5 !mb-6" id="{{ post.data.Ort | safe }}">
+      <div class="text-xl basis-1/5 font-bold self-start z-0 sticky top-14 pr-3 pl-3">
+      {{ post.data.Ort | safe }}
+      {% if post.data.Verschollen == "yes" %}
+          <div class="font-normal italic">Verschollen</div>
+        {% endif %}
+      </div>
+      <div class="basis-4/5 flex flex-col items-stretch gap-y-4">
+        <div class="flex flex-col sm:flex-row flex-wrap gap-x-4 gap-y-5 justify-start">
+          {{ post.content | safe }}
+        </div>
+        {# <button class="hideprevbutton self-stretch min-h-[3rem] border border-black">
+          ANZEIGEN
+        </button> #}
+      </div>
     </div>
   {%- endfor -%}
 </div>

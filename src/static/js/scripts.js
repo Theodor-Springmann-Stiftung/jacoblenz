@@ -14,7 +14,8 @@ const hideifsearchingclasses = [
   "category",
 ];
 const categoryclass = "category";
-const searchableclasses = ["searchable", "handschrift"];
+const searchableclasses = ["searchable", "handschrift", "handschrift-liste"];
+const hideprevsiblingbtnclass = "hideprevbutton";
 
 // Elements
 let listelement = document.getElementById(listid);
@@ -24,6 +25,7 @@ let scrollbtnelement = document.getElementById(scrollbuttonid);
 let listselectelement = document.getElementById(listselectid);
 let inputelement = document.querySelector(inputselector);
 let categoryelements = document.getElementsByClassName(categoryclass);
+let hideprevsiblingbtnelements = document.getElementsByClassName(hideprevsiblingbtnclass);
 let showifsearchingelements = document.querySelectorAll("." + showifsearchingclasses.join(", ."));
 let hideifsearchingelements = document.querySelectorAll("." + hideifsearchingclasses.join(", ."));
 let searchableelements = document.querySelectorAll("." + searchableclasses.join(", ."));
@@ -63,7 +65,7 @@ const scrollFunction = function () {
   }
 };
 
-function isInViewport(element) {
+const isInViewport = function (element) {
   const rect = element.getBoundingClientRect();
   return (
     rect.top >= 0 &&
@@ -74,7 +76,7 @@ function isInViewport(element) {
   );
 }
 
-function createIndex(id) {
+const createIndex = function(id) {
   for (var s of searchableelements) {
       dictionary.push({
         category: s.closest("." + categoryclass),
@@ -84,7 +86,7 @@ function createIndex(id) {
   }
 }
 
-function findWord(word, d) {
+const findWord = function (word, d) {
   var sw = word.trim().toLowerCase();
   return d.filter(function (e) {
     if (e.searchitem.indexOf(sw) !== -1) {
@@ -133,6 +135,10 @@ const search = function (evt) {
       if (found.indexOf(item) !== -1) {
         item.category.classList.add("search-expanded");
         item.category.classList.remove(hiddenclass);
+        let prevbutton = item.category.getElementsByClassName(hideprevsiblingbtnclass);
+        if (prevbutton.length > 0) {
+          prevbutton[0].previousElementSibling.classList.remove(hiddenclass);
+        } 
         item.element.classList.remove(hiddenclass);
         if (term.length >= 2) {
           $(item.element).mark(term, {
@@ -166,19 +172,43 @@ const searchreset = function () {
   showifinarr(hideifsearchingelements);
   hideifinarr(showifsearchingelements);
   inputelement.value = "";
+  resethidecat();
 };
 
-hideifinarr(showifsearchingelements);
+const resethidecat = function() {
+  for (let el of hideprevsiblingbtnelements) {
+    let prevsib = el.previousElementSibling;
+    if (!prevsib.classList.contains(hiddenclass)) {
+      prevsib.classList.add(hiddenclass);
+    }
+  }
+}
+
+const toggleghidecat = function(cat) {
+  let prevsib = cat.previousElementSibling;
+  if (prevsib.classList.contains(hiddenclass)) {
+    prevsib.classList.remove(hiddenclass);
+  } else {
+    prevsib.classList.add(hiddenclass);
+  }
+}
+
 
 // Mobile menu
 if (navbtnelement !== null && navelelement !== null) {
   navbtnelement.addEventListener("click", () => {
-    console.log("hallo!");
     if (navelelement.classList.contains(hiddenclass)) {
       navelelement.classList.remove(hiddenclass);
     } else {
       navelelement.classList.add(hiddenclass);
     }
+  });
+}
+
+// Hide category button
+for (let el of hideprevsiblingbtnelements) { 
+  el.addEventListener("click", () => {
+    toggleghidecat(el);
   });
 }
 
@@ -223,3 +253,5 @@ if (listelement) {
     };
   }
 }
+
+hideifinarr(showifsearchingelements);

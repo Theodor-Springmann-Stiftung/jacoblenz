@@ -191,9 +191,12 @@
     }
 
     .handschrift-sammlung .information {
-      @apply pr-4
+      @apply bg-slate-50 border border-gray-400 px-4 py-1.5 mr-4
     }
 
+    .handschrift-sammlung .handschrift-liste {
+      @apply w-full mr-4
+    }
 
     .handschrift-sammlung .beschreibung {
       @apply mt-1.5
@@ -248,6 +251,11 @@
     .maincolumn p {
       @apply max-w-[85ch] hyphenation mb-4
     }
+  }
+
+  .handschrift-sammlung .handschrift-liste ol {
+    list-style-type: disc; 
+    list-style-position: outside; 
   }
 
   .hidden-important {
