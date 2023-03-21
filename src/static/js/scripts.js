@@ -166,7 +166,6 @@ const searchreset = function () {
   showifinarr(hideifsearchingelements);
   hideifinarr(showifsearchingelements);
   inputelement.value = "";
-  inputelement.focus();
 };
 
 hideifinarr(showifsearchingelements);
@@ -174,6 +173,7 @@ hideifinarr(showifsearchingelements);
 // Mobile menu
 if (navbtnelement !== null && navelelement !== null) {
   navbtnelement.addEventListener("click", () => {
+    console.log("hallo!");
     if (navelelement.classList.contains(hiddenclass)) {
       navelelement.classList.remove(hiddenclass);
     } else {

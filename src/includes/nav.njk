@@ -6,7 +6,7 @@
 {% if not entry.children.length %}
   <a {% if entry.url == page.url %} class="active"{% endif %} href="{{ entry.url }}">{{ entry.title }}</a>
   {% if entry.pdf == "yes" %}
-    <span class="text-sm inline-block bg-slate-200 ml-1 px-1.5 rounded relative bottom-0.5">mit PDF</span>
+    <span class="inline-block bg-slate-200 ml-1 px-1.5 rounded relative bottom-0.5">mit PDF</span>
   {% endif %}
 {% else %}
     <div>{{ entry.title }}</div>
@@ -21,7 +21,7 @@
 </li>
 {%- endmacro %}
 
-<nav class="hidden desktop:block py-4 sidebar-nav px-4" id="navigation">
+<nav class="hidden-important desktop:!block py-4 sidebar-nav px-4" id="navigation">
 <ul>
 {%- for entry in navPages %}{{ renderNavListItem(entry) }}{%- endfor -%}
 </ul>
