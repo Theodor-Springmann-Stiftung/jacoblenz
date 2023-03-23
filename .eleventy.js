@@ -164,6 +164,10 @@ module.exports = function (config) {
         outputdir = "dist";
     }
 
+    config.addShortcode("year", () => `${new Date().getFullYear()}`);
+    config.addShortcode("month", () => `${new Date().getMonth() + 1}`);
+    config.addShortcode("day", () => `${new Date().getDate()}`);
+
     return { 
         // Set custom directories for dynamic pages, data, includes, layouts and finally the generated output
         dir: 
