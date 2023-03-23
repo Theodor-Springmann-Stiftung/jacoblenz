@@ -253,6 +253,17 @@
     }
   }
 
+  #navigation-button {
+    width: 3.5rem;
+    height: 3.5rem;
+    stroke: #000;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: miter;
+    fill: none;
+    color: #000;
+  }
+
   .handschrift-sammlung .handschrift-liste ol {
     list-style-type: disc; 
     list-style-position: outside; 
