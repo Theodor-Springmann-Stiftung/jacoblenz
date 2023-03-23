@@ -161,7 +161,7 @@ module.exports = function (config) {
     // Output directory
     var outputdir = "site";
     if (process.env.ELEVENTY_ENVIRONMENT == "production") {
-        outputdir = "dist";
+        outputdir = "docs";
     }
 
     config.addShortcode("year", () => `${new Date().getFullYear()}`);
