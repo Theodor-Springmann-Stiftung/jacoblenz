@@ -180,6 +180,6 @@ module.exports = function (config) {
             },
             
         // Set template formats so that other files won't be included in dist
-        templateFormats: ["njk", "md", "html"]
+        templateFormats: ["njk", "md", "liquid", "html"]
     };
 };

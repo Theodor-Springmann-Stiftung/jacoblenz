@@ -37,7 +37,7 @@ This a template providing a sane base config for eleventy, mainly for the purpos
 | `npm run watch` | Run dev server in watch mode |
 | `npm run css_watch` | Watch for CSS changes & rebuild |
 | `npm run build` | First build the CSS, then the site |
-
+| `npm run prod_build` | First build the CSS, then the site in production mode |
 ## Other Settings
 ```
 .\.eleventy.js

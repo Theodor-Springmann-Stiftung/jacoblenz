@@ -131,14 +131,17 @@
 </nav> 
 <div class="hidden desktop:block">
     <div class="bg-slate-50 border-t border-lenz-11-blue py-5 px-4">
-        <form class="flex flex-row w-full">
-        <input class="px-1.5 italic border border-gray-500 grow" type="text" placeholder="Suchbegriff..." disabled/>
-        <button class="inline-block ml-2 px-2 border border-gray-500 text-gray-500 italic  " disabled>Suche</button>
+        <form action="https://duckduckgo.com/" method="get" id="global-search-form" class="flex flex-row w-full">
+        <div class="flex flex-row w-full">
+            <input class="px-1.5 italic border border-gray-500 grow" type="text" name="q" placeholder="Suchbegriff..." required/>
+            <button id="global-search-button" class="inline-block ml-2 px-2 border border-gray-500 text-gray-500 italic" type="submit" >Suche</button>
+            </div>
+            <input class="grow-0 shrink" type="hidden" name="sites" value="https://lenz-archiv.de">
         </form>
     </div>
 </div>
 <footer class="hidden desktop:block fixed bottom-0 text-sm text-center py-1 px-4 grow-0 shrink-0">
-    Stand: 30.11.2023
+    Stand: 12.12.2023
     | <a href="https://github.com/Theodor-Springmann-Stiftung/jacoblenz">Code</a> | 
         <a href="/datenschutz/">Datenschutz & Impressum</a>
 </footer>
