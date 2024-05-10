@@ -5,16 +5,23 @@
 <li>
 {% if not entry.children.length %}
   <a {% if entry.url == page.url %} class="active"{% endif %} href="{{ entry.url }}">{{ entry.title }}</a>
-  {% if entry.pdf == "yes" %}
-    <span class="inline-block bg-slate-200 ml-1 px-1.5 rounded relative bottom-0.5">mit PDF</span>
+  {% if entry.status == "Abgeschlossen" %}
+    <span class="inline-block bg-slate-200 ml-1 px-1.5 rounded relative bottom-0.5 text-xs shadow-sm 
+		align-bottom">Abgeschlossen</span>
+  {% elseif entry.status == "Laufend" %}
+    <span class="inline-block bg-slate-200 ml-1 px-1.5 rounded relative bottom-0.5 text-xs shadow-sm 
+		align-bottom">in
+		Vorbereitung</span>
   {% endif %}
+
 {% else %}
     <div>{{ entry.title }}</div>
 {% endif %}
+
 {%- if entry.children.length -%}
   <ul>
     {%- for child in entry.children %}
-        {{ renderNavListItem(child) }}
+        {{ renderNavListItem(child) }}	
     {% endfor -%}
   </ul>
 {%- endif -%}
