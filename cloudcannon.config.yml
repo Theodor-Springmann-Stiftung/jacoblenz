@@ -1,0 +1,55 @@
+source: src/dynamic
+paths:
+  data: ../data
+  collections: ''
+  layouts: ../layouts
+  static: ''
+  uploads: uploads
+  includes: _includes
+  pages: ''
+collections_config:
+  data:
+    path: ../data
+    output: false
+    icon: notes
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+  pages:
+    path: ''
+    output: true
+    filter: strict
+    icon: notes
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+  Handschriften:
+    path: dynamic/lists/handschriften
+    output: true
+    url:
+    filter:
+    parse_branch_index:
+    name: Handschriften
+    description: ''
+    icon: notes
+    documentation:
+    preview:
+    sort:
+    sort_options:
+    singular_name:
+    singular_key:
+    _editables:
+    _enabled_editors:
+    _inputs:
+    _select_data:
+    _structures:
+    add_options:
+    create:
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+    new_preview_url:
+    schemas:
+    schema_key:
+data_config: {}
+timezone: Etc/UTC
