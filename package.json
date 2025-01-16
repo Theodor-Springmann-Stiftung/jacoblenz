@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "Test project for 11ty",
 	"scripts": {
-		"prod_build": "npx postcss src/static/css/site.css -o src/static/css/output.css --verbose && set ELEVENTY_ENVIRONMENT=production && ELEVENTY_ENVIRONMENT=production npx @11ty/eleventy",
+		"prod_build": "npx postcss src/static/css/site.css -o src/static/css/output.css --verbose & set ELEVENTY_ENVIRONMENT=production & npx @11ty/eleventy",
 		"linux_pb": "npx postcss src/static/css/site.css -o src/static/css/output.css --verbose && export ELEVENTY_ENVIRONMENT=production && npx @11ty/eleventy",
 		"build": "npx postcss src/static/css/site.css -o src/static/css/output.css && npx @11ty/eleventy",
 		"watch": "npx @11ty/eleventy --serve",

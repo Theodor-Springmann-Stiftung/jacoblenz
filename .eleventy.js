@@ -210,9 +210,9 @@ module.exports = function (config) {
   config.addPassthroughCopy({ "src/static/": "/static/" });
 
   // Output directory
-  var outputdir = "site";
-  if (process.env.ELEVENTY_ENVIRONMENT == "production") {
-    outputdir = "docs";
+  var outputdir = "docs";
+  if (process.env.ELEVENTY_ENVIRONMENT == "development") {
+    outputdir = "site";
   }
 
   config.addShortcode("year", () => `${new Date().getFullYear()}`);
