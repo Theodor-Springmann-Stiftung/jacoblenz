@@ -193,6 +193,25 @@ const toggleghidecat = function(cat) {
   }
 }
 
+const initHoverSwap = function () {
+  const imgs = document.querySelectorAll("img[data-hover]");
+  for (let img of imgs) {
+    if (!img.dataset.src) {
+      img.dataset.src = img.getAttribute("src");
+    }
+    const showHover = function () {
+      img.setAttribute("src", img.dataset.hover);
+    };
+    const showOriginal = function () {
+      img.setAttribute("src", img.dataset.src);
+    };
+    img.addEventListener("mouseenter", showHover);
+    img.addEventListener("mouseleave", showOriginal);
+    img.addEventListener("touchstart", showHover, { passive: true });
+    img.addEventListener("touchend", showOriginal);
+  }
+};
+
 
 // Mobile menu
 if (navbtnelement !== null && navelelement !== null) {
@@ -204,6 +223,10 @@ if (navbtnelement !== null && navelelement !== null) {
     }
   });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  initHoverSwap();
+});
 
 // Hide category button
 for (let el of hideprevsiblingbtnelements) { 

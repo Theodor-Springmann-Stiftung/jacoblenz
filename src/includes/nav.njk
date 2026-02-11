@@ -3,7 +3,7 @@
 
 {% macro renderNavListItem(entry) -%}
 <li>
-{% if not entry.children.length %}
+{% if not entry.children.length or entry.link %}
   <a {% if entry.url == page.url %} class="active"{% endif %} href="{{ entry.url }}">{{ entry.title }}</a>
   {% if entry.status == "Abgeschlossen" %}
     <span class="inline-block bg-slate-200 ml-1 px-1.5 rounded relative bottom-0.5 text-xs shadow-sm 
