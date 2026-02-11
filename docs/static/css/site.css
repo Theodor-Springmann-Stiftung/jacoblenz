@@ -148,6 +148,52 @@
     margin: 0;
   }
 
+  .buechner-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 980px;
+  }
+
+  .buechner-grid figure {
+    margin: 0;
+  }
+
+  .buechner-grid figcaption {
+    margin-top: 0.4rem;
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .caption-source {
+    display: inline-block;
+    margin-top: 0.2rem;
+    font-size: 0.85rem;
+    color: #475569;
+  }
+
+  @media (min-width: 700px) {
+    .buechner-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+  }
+
+  .buechner-sources {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    background: rgba(248, 250, 252, 0.8);
+  }
+
+  .buechner-sources p {
+    margin: 0 0 0.5rem 0;
+  }
+
+  .buechner-sources p:last-child {
+    margin-bottom: 0;
+  }
+
   @media (min-width: 700px) {
     .map-grid-custom {
       grid-template-columns: repeat(2, minmax(0, 1fr));
